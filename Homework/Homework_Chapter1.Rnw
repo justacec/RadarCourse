@@ -1,0 +1,63 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[left=0.5in, right=0.5in, top=0.5in, bottom=0.5in]{geometry}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{amsmath}
+
+\newlength{\loseit}
+\newlength{\answidth}
+
+\newcommand{\question}[4][1]{
+\setlength{\loseit}{0.5in * #1}
+\setlength{\answidth}{8.5in - 1in - 0.5in - \loseit}
+\begin{minipage}[t]{.5in}
+#2
+\end{minipage}
+\begin{minipage}[t]{\answidth}
+#3
+
+\vspace{.2in}
+
+#4
+\end{minipage}
+
+\vspace{.2in}
+}
+
+\begin{document}
+
+\Large{Chapter 1 Homework}
+\hfill
+\Large{Justace Clutter}
+
+\vspace{.5in}
+
+\question{1.1}
+{Consider a radar with a pulsed waveform (sinusoidally varying electric field) with a peak power of 6 kW.  What is the absolute maximum power emitted? Does it depend on frequency? Polarization?}
+{
+The absolute maximum emitted power is 6 kW and it does not deppend on the frequency or the polorization.
+}
+
+\question{1.2}
+{Consider a flat plate antenna ($\eta=0.5$) of area 1 m$^2$ operating at mid-C band.}
+{
+\question[2]{a}{Calculate its gain}
+{
+
+Antenna gain follows the following formula for cases such that the wavelength is much less than the aperature diameter:
+
+\begin{equation}
+G_0 = G(0,0) = \frac{4\pi A\eta}{\lambda^2}
+\end{equation}
+
+The question requests the gain in the mid-C band which would be approximately 6 GHz ($\lambda = \frac{c}{f} = 0.03$ m).  Since the wavelength is much less than the effective diameter of the square antenna ($\sim$ 1m), then the above equation holds for this condition.
+
+\begin{equation}
+G_0 = G(0,0) = \frac{4\pi A\eta}{\lambda^2} = \frac{4\pi(1)(0.5)}{0.03^2} = 6981
+\end{equation}
+}
+
+\question[2]{b}{Calculate its peak RCS in the midband of L, W, C, X, and Ku. What is the equation relating its gain to RCS, as a function of $\lambda$? (See Tables 3.1 and 3.2.)}{}
+}
+\end{document}
