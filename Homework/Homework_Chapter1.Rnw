@@ -83,10 +83,23 @@ The solution for this problem is accomplished by solving the radar equation for 
 \begin{align*}
 \text{SNR} & = \frac{P_{avg}G^2\lambda^2\sigma\tau_\text{dwell}}{(4\pi)^3R^4kT_sC_BL} \\
 \therefore R & = \left[\frac{P_{avg}G^2\lambda^2\sigma\tau_\text{dwell}}{(4\pi)^3(\text{SNR})kT_sC_BL}\right]^{\frac{1}{4}} \\
-& = \left[\frac{(40)(2\cdot 30)(-13.01)(-20)(-15.2)}{1}\right]^{\frac{1}{4}}
 \end{align*}
 
-*Note: Do not forget to convert the resulting R which will be in dB back to a physical distance and to take into account that the $\frac{1}{4}$ power really turns into a divide by 4 in the dB space...
+In keeping with the world of sonar and radar, most quantites are calculated in dB space.  I now convert the above equation to dB form and substitute all the nessessary quantities.
+
+\begin{align*}
+R & = \left[\frac{P_{avg}G^2\lambda^2\sigma\tau_\text{dwell}}{(4\pi)^3(\text{SNR})kT_sC_BL}\right]^{\frac{1}{4}} \\
+10\log_{10}(R) & = 10\log_{10}\left(\left[\frac{P_{avg}G^2\lambda^2\sigma\tau_\text{dwell}}{(4\pi)^3(\text{SNR})kT_sC_BL}\right]^{\frac{1}{4}}\right)\\
+& = \frac{1}{4}\cdot 10 \left[\log_{10}(P_{avg}) + 2\log_{10}(G) + 2\log_{10}(\lambda) + \log_{10}(\sigma) + \log_{10}(\tau_\text{dwell})\right.\\
+& \ \ \ \ \ \left. - 3\log_{10}((4\pi)) - \log_{10}(\text{SNR}) - \log_{10}(kT_s) - \log_{10}(C_B) - \log_{10}(L)\right]\\
+& = \frac{1}{4}\left[40 + 60 + (-13.01) + (-20) + (-15.2) - 33 - 17 - (-201) - 0 - 7\right]\\
+& = \frac{1}{4}(195.79) = 48.9 \text{ dBm}
+\end{align*}
+
+The solution of 48.9 is in the units of dBm which correlates to 77,600 m.
+
+%& = \left[\frac{(40)(2\cdot 30)(-13.01)(-20)(-15.2)}{(33)(17)(-201.0)(0)(7)}\right]^{\frac{1}{4}}
+
 
 }
 
