@@ -27,7 +27,6 @@
 }
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
 
 \Large{Chapter 1 Homework}
 \hfill
@@ -97,10 +96,6 @@ R & = \left[\frac{P_{avg}G^2\lambda^2\sigma\tau_\text{dwell}}{(4\pi)^3(\text{SNR
 \end{align*}
 
 The solution of 48.9 is in the units of dBm which correlates to 77,600 m.
-
-%& = \left[\frac{(40)(2\cdot 30)(-13.01)(-20)(-15.2)}{(33)(17)(-201.0)(0)(7)}\right]^{\frac{1}{4}}
-
-
 }
 
 \question{1.3}
