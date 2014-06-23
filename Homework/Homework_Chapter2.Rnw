@@ -43,6 +43,8 @@ Consider a spherical wave emitted from a point antenna.  For the far field, we w
 \begin{center}
 \includegraphics[width=4in]{Figures/HW2_2_6__1.pdf}
 \end{center}
+}
+
 
 <<>>=
 
@@ -84,8 +86,5 @@ rp
 
 @
 
-
-
-}
 
 \end{document}
