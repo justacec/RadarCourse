@@ -28,7 +28,7 @@
 }
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+%\SweaveOpts{concordance=TRUE}
 
 \Large{Chapter 2 Homework}
 \hfill
@@ -43,17 +43,15 @@ Consider a spherical wave emitted from a point antenna.  For the far field, we w
 \begin{center}
 \includegraphics[width=4in]{Figures/HW2_2_6__1.pdf}
 \end{center}
-}
 
-
-<<>>=
+<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
 
 require(ggplot2)
 
 Lt = 1
-LBandFreq = 1.5e9 # Hz
-SBandFreq = 3e9 # Hz
-XBandFreq = 10e9 # Hz
+LBandFreq  = 1.5e9 # Hz
+SBandFreq  = 3e9 # Hz
+XBandFreq  = 10e9 # Hz
 KuBandFreq = 15e9 # Hz
 
 c = 3e8 # m/s
@@ -63,6 +61,10 @@ SBandLambda = c / SBandFreq
 XBandLambda = c / XBandFreq
 KuBandLambda = c / KuBandFreq
 
+dist_L = 2 / LBandLambda
+dist_S = 2 / SBandLambda
+dist_X = 2 / XBandLambda
+dist_Ku = 2 / KuBandLambda
 
 X = seq(0, 3, by = 0.01)
 Lreps = rep(LBandLambda, length(X))
@@ -86,5 +88,8 @@ rp
 
 @
 
+The threshold range for the far field for the L band, S Band, X Band, and Ku Band is \Sexpr{dist_L} m, \Sexpr{dist_S} m, \Sexpr{dist_X} m, \Sexpr{dist_Ku} m, respectively.
+
+}
 
 \end{document}
