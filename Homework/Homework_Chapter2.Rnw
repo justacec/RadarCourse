@@ -1,0 +1,40 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[left=0.5in, right=0.5in, top=0.5in, bottom=0.5in]{geometry}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newlength{\loseit}
+\newlength{\answidth}
+
+\newcommand{\question}[4][1]{
+\setlength{\loseit}{0.5in * #1}
+\setlength{\answidth}{8.5in - 1in - 0.5in - \loseit}
+\begin{minipage}[t]{.5in}
+#2
+\end{minipage}
+\begin{minipage}[t]{\answidth}
+#3
+
+\vspace{.2in}
+
+#4
+\end{minipage}
+
+\vspace{.2in}
+}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\Large{Chapter 2 Homework}
+\hfill
+\Large{Justace Clutter}
+
+\vspace{.5in}
+
+
+
+\end{document}
