@@ -1,4 +1,4 @@
-\documentclass[letterpaper,10pt]{article}
+\documentclass[letterpaper,8pt]{article}
 
 \usepackage[left=0.5in, right=0.5in, top=0.5in, bottom=0.5in]{geometry}
 \usepackage{longtable}
@@ -40,9 +40,33 @@
 Consider a spherical wave emitted from a point antenna.  For the far field, we want the wave to be essentially planar over an aperture of width D at range R.  If the far-field criterion is that the wavefront deviate no more than $\frac{\lambda}{16}$ from a plane (the Fraunhofer criterion), show that $R$ (far field) $= 2D^2/\lambda$.  Calculate the near- and far-field ``boundaries'' ($R=2D^2/\lambda$), for $D=1$m, at L, S, X, Ku, and Ka bands.
 }{
 
+The following solution depends on the small angle approximation:
+
+\begin{equation*}
+x = r\left(1-\frac{\theta^2}{2}\right) \qquad \text{ and } \qquad y = r\theta \text{.}
+\end{equation*}
+
+\begin{minipage}{3in}
 \begin{center}
-\includegraphics[width=4in]{Figures/HW2_2_6__1.pdf}
+\includegraphics[width=3in]{Figures/HW2_2_6__1.pdf}
 \end{center}
+\end{minipage}
+\begin{minipage}{3in}
+
+\begin{align*}
+y & = \left.R\theta\right|_{y=\frac{D}{2}} \rightarrow \theta = \frac{D}{2R} \\
+\therefore x & = R\left(1-\frac{\left(\frac{D}{2R}\right)^2}{2}\right) \\
+d & = R - x \\
+& = R - R\left(1-\frac{\left(\frac{D}{2R}\right)^2}{2}\right) \\
+\therefore R & = \frac{D^2}{8d}
+\end{align*}
+\end{minipage}
+
+Evaluating the final equation for $R$ with the substitution that $d=\frac{\lambda}{16}$ yeilds the final relationship for the far-field threshold range:
+
+\begin{equation*}
+R = 2\frac{D^2}{\lambda}
+\end{equation*}
 
 <<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
 
