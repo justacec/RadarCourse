@@ -44,6 +44,48 @@ Consider a spherical wave emitted from a point antenna.  For the far field, we w
 \includegraphics[width=4in]{Figures/HW2_2_6__1.pdf}
 \end{center}
 
+<<>>=
+
+require(ggplot2)
+
+Lt = 1
+LBandFreq = 1.5e9 # Hz
+SBandFreq = 3e9 # Hz
+XBandFreq = 10e9 # Hz
+KuBandFreq = 15e9 # Hz
+
+c = 3e8 # m/s
+
+LBandLambda = c / LBandFreq
+SBandLambda = c / SBandFreq
+XBandLambda = c / XBandFreq
+KuBandLambda = c / KuBandFreq
+
+
+X = seq(0, 3, by = 0.01)
+Lreps = rep(LBandLambda, length(X))
+Sreps = rep(SBandLambda, length(X))
+Xreps = rep(XBandLambda, length(X))
+Kureps = rep(KuBandLambda, length(X))
+Ltype = rep('L', length(X))
+Stype = rep('S', length(X))
+Xtype = rep('X', length(X))
+Kutype = rep('Ku', length(X))
+
+data = data.frame(x = rep(X, 4), lambda = c(Lreps, Sreps, Xreps, Kureps), type = c(Ltype, Stype, Xtype, Kutype))  
+data$r = 2 * (data$x^2) / data$lambda
+
+rp = ggplot(data) + theme_bw() +
+  geom_line(aes(x = x, y = r, color = type)) +
+  labs(x = 'D (m)', y = 'R (m)') +
+  scale_color_discrete(name = 'Band') +
+  theme(legend.key = element_blank())
+rp
+
+@
+
+
+
 }
 
 \end{document}
