@@ -120,9 +120,28 @@ The threshold range for the far field for the L band, S Band, X Band, and Ku Ban
 From the fundamental properties of a parabola, show that for a parabolic dish antenna with a point-source feed at the focal point and the aperture (planer surfece within rim of dish) perpendicular to the axis of revolution, all radiation leaving the aperture has the same phase.
 }{
 
+The parabola is constructed such that the distance between any point on the curve and the focal point is the same as the distance between that same point and what is called the directex.  This is represented mathematically as
+
+\begin{equation*}
+|y+b| = \sqrt{x^2 + (y-b)^2}\text{.}
+\end{equation*}
+
+In the figure below, the directex is the horizonatl dashed line below the $x$-axis and the above equation allows one state that the line segments $\overline{BF}$ and $\overline{BE}$ are the same length and that the line segments $\overline{CF}$ and $\overline{CD}$ are the same length.
+
 \begin{center}
-\includegraphics[width=6in]{Figures/HW2_2_13__1.pdf}
+\includegraphics[width=5in]{Figures/HW2_2_13__1.pdf}
 \end{center}
+
+\begin{align*}
+\overline{AD} & = \overline{BE} & \\
+\overline{AD} & = \overline{BF} & \text{ Prop. of Parabola} \\
+\overline{AC} + \overline{CD} & = \overline{BF} & \text{ Substitution} \\
+\overline{AC} + \overline{CF} & = \overline{BF} & \text{ Prop. of Parabola} \\
+\overline{ACF} & = \overline{BF} & \\
+\end{align*}
+
+Since the line segments $\overline{ACF}$ and $\overline{BF}$ are the same length, the phase of the signals will be the same as the signal leaves the antenna.
+
 
 }
 
