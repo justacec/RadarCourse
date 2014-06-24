@@ -116,4 +116,14 @@ The threshold range for the far field for the L band, S Band, X Band, and Ku Ban
 
 }
 
+\question{2.16}{
+From the fundamental properties of a parabola, show that for a parabolic dish antenna with a point-source feed at the focal point and the aperture (planer surfece within rim of dish) perpendicular to the axis of revolution, all radiation leaving the aperture has the same phase.
+}{
+
+\begin{center}
+\includegraphics[width=6in]{Figures/HW2_2_13__1.pdf}
+\end{center}
+
+}
+
 \end{document}
