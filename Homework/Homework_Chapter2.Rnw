@@ -1,38 +1,32 @@
 \documentclass[letterpaper,10pt]{article}
 
-\usepackage[left=0.5in, right=0.5in, top=0.5in, bottom=0.5in]{geometry}
+\usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
 \usepackage{longtable}
-\usepackage{calc}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{graphicx}
 
-\newlength{\loseit}
-\newlength{\answidth}
-
-\newcommand{\question}[4][1]{
-\setlength{\loseit}{0.5in * #1}
-\setlength{\answidth}{8.5in - 1in - 0.5in - \loseit}
-\begin{minipage}[t]{.5in}
-#2
-\end{minipage}
-\begin{minipage}[t]{\answidth}
-#3
+\newcommand{\question}[3]{
+\begin{itemize}
+\item[{\makebox[1cm]{#1)}}] #2
 
 \vspace{.2in}
 
-#4
-\end{minipage}
+#3
+
+\end{itemize}
 
 \vspace{.2in}
 }
 
 \begin{document}
-%\SweaveOpts{concordance=TRUE}
 
-\Large{Chapter 2 Homework}
+{\large Chapter 2 Homework}
 \hfill
-\Large{Justace Clutter}
+{\large Justace Clutter}
+
+\vspace{.1in}
+
+\hrule
 
 \vspace{.5in}
 
@@ -129,7 +123,7 @@ The parabola is constructed such that the distance between any point on the curv
 In the figure below, the directex is the horizonatl dashed line below the $x$-axis and the above equation allows one state that the line segments $\overline{BF}$ and $\overline{BE}$ are the same length and that the line segments $\overline{CF}$ and $\overline{CD}$ are the same length.
 
 \begin{center}
-\includegraphics[width=5in]{Figures/HW2_2_13__1.pdf}
+\includegraphics[width=4in]{Figures/HW2_2_13__1.pdf}
 \end{center}
 
 \begin{align*}
