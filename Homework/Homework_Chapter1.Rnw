@@ -2,12 +2,9 @@
 
 \usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
 \usepackage{longtable}
-\usepackage{calc}
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-\newlength{\loseit}
-\newlength{\answidth}
 
 \newcommand{\question}[3]{
 \begin{itemize}
