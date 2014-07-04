@@ -30,6 +30,30 @@
 
 \vspace{.5in}
 
+\question{2.1}{
+Show that $F=(S/N)_{\text{in}}/(S/N)_{\text{out}}=(N_\text{out}/N_\text{in})(S_\text{in}/S_\text{out})=(N_\text{out}/N_\text{in})(1/G_\text{LNA})$ if and only if $T_\text{ant}=T_\text{radar}=T_0$.
+}{}
+
+\question{2.2}{
+Show that, if we define $F2=(S/N)_\text{in}/(S/N)_\text{out}$ and it $T_\text{ant}=T_\text{radar}$, then $T_\text{rcvr}=(F2-1)T_\text{ant}$.
+}{}
+
+\question{2.3}{
+Consider a sensitive radar observing targets against deep space ($T_\text{ant}=3\text{K}$), with an LNA cooled with liquid helium to $T_\text{rcvr}=4.2\text{K}$.  If $L_\text{radar}=1$, what is the noise figure in decibels?  What is $T_\text{sys}$?
+}{}
+
+\question{2.4}{
+In the front-end circuit shown in Figure 2.11, the designer has put a system gain control, in the form of a variable attenuator, after the first LNA.  Sketch the variation of overall system gain and system noise figure as this attenuator is varied over its full range. (Assume that $T_\text{ant}=T_\text{radar}=T_0$.)
+}{}
+
+\question{2.5}{
+Show that the standard deviation of the quantization error and an A/D converter is
+
+\begin{equation*}
+\sigma_\epsilon = \frac{\text{\textit{least significant bit}}}{\sqrt{12}}
+\end{equation*}
+}{}
+
 \question{2.6}{
 Consider a spherical wave emitted from a point antenna.  For the far field, we want the wave to be essentially planar over an aperture of width D at range R.  If the far-field criterion is that the wavefront deviate no more than $\frac{\lambda}{16}$ from a plane (the Fraunhofer criterion), show that $R$ (far field) $= 2D^2/\lambda$.  Calculate the near- and far-field ``boundaries'' ($R=2D^2/\lambda$), for $D=1$m, at L, S, X, Ku, and Ka bands.
 }{
@@ -109,6 +133,43 @@ rp
 The threshold range for the far field for the L band, S Band, X Band, and Ku Band is \Sexpr{dist_L} m, \Sexpr{dist_S} m, \Sexpr{dist_X} m, \Sexpr{dist_Ku} m, respectively.
 
 }
+
+\question{2.7}{
+Using Huygen's principle, deriver Snell's law of refraction between two media: $n_1\sin\theta_1=n_2\sin\theta_2$, where $n$ is the index of refraction and $\theta$ is the incidence angle (zero for normal incidence).
+}{}
+
+\question{2.8}{
+Calculate the coordinate-transform matricies between the $(\theta, \phi)$ coordinates and the $(\alpha, \epsilon)$ coordinates.  Suppose that $\alpha=-30$ degrees and $\epsilon=45$ degrees; find $\theta,\phi$.  Suppose that $\theta=45$ degrees and $\phi=30$ degrees; find $\alpha, \epsilon$.
+}{}
+
+\question{2.9}{
+For an infinite slit aperture of width $L$ parallel to the $x$ axis, with $\mathbf{E}$ perpendicular to the slit edges --- $\mathbf{E}=(0, E_y, 0)$ --- in the $yz$ plane, show that $E_x=0$ and in the $yz$ plane, in polar coordinates,
+
+\begin{equation*}
+E_\theta(r, \theta) = jk\frac{e^{-jkr}}{2\pi r}E_yL\text{ sinc}\left(\frac{kL\sin\theta}{2}\right)
+\end{equation*}
+}{}
+
+\question{2.10}{
+For a finite rectangular aperture, $L_x$ by $L_y$, with $\mathbf{E}=\mathbf{E_0}$ parallel to $\mathbf{y}$, show that
+
+\begin{align*}
+E_\theta(r, \theta, \phi) & = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\sin\phi\text{ sinc}\left(\frac{kL_x}{2}\mu\right)\text{ sinc}\left(\frac{kL_y}{2}\nu\right) \\
+E_\phi(r, \theta, \phi) & = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\cos\theta\cos\phi\text{ sinc}\left(\frac{kL_x}{2}\mu\right)\text{ sinc}\left(\frac{kL_y}{2}\nu\right)
+\end{align*}
+
+where $\mu=\sin\theta\cos\phi$, $\nu=\sin\theta\sin\phi$. (The underlined factors are the obliquity factos.)  In the $E$ plane ($yz$ plane), $\phi=90$ degrees; show that
+
+\begin{equation*}
+E_\theta(r,\theta) = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\text{ sinc}\left(\frac{kL_y}{2}\sin\theta\right), \quad E_\phi = 0
+\end{equation*}
+
+In the $H$ plane ($xz$ plane), $\phi=0$ degrees; show that
+
+\begin{equation*}
+E_\theta(r,\theta) = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\cos\theta\text{ sinc}\left(\frac{kL_x}{2}\sin\theta\right), \quad E_\phi = 0
+\end{equation*}
+}{}
 
 \question{2.16}{
 From the fundamental properties of a parabola, show that for a parabolic dish antenna with a point-source feed at the focal point and the aperture (planer surfece within rim of dish) perpendicular to the axis of revolution, all radiation leaving the aperture has the same phase.
