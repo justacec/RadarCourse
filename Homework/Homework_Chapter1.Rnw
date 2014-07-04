@@ -278,7 +278,15 @@ With this relationship, for each nanosecond of time you add to the pulse length,
 }
 
 \question{1.6}{A lossless radar with gain $G$ and wavelength $\lambda$ is located at a height $H$ above an infinite, flat planar, perfectly conducting surface, with boresight directed perpendicular to the surface. Compute $\Gamma$.}
-{}
+{
+
+Since the reflector is infinite in size and perfectly conducting, this problem can be reduced to the situation of an emitter that is exactly $2H$ away.  The received power is then going to be determined by assuming spherical spreading from the emitter and the cross-section of the receiving antenna.  This is taken directly from Equation 1.20 in the text.  In this case, $L\rightarrow 0$ since it is a lossless antenna and $R\rightarrow 2H$.  The modified equation is:
+
+\begin{equation*}
+\Gamma = \frac{G^2\lambda^2\sigma}{(4\pi)^3(2H)^4}
+\end{equation*}
+
+}
 
 
 \end{document}
