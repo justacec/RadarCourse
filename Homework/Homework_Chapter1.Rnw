@@ -187,9 +187,34 @@ The solution of 48.9 is in the units of dBm which correlates to 77,600 m.
 {A pulsed mid-X band radar has a maximum unambiguous velocity interval $\Delta \nu_\mu=600$ m/s. (Assume $\tau << \tau_R$.)}
 {
 
-\question{a}{What is its maximum unambiguous range $R_u$?}{}
-\question{b}{Suppose its frequency is changed to mid-Ku band and other parameters remain the same. Calculate $\Delta \nu_\mu$ and $R_u$.}{}
+\question{a}{What is its maximum unambiguous range $R_u$?}{
+The first operation is to use the $\Delta \mu_\mu$ value stated to determine the $f_R$.  This can then be used to determine the maximum unambiguous range.  The value for $f_R$ is found in the following way:
 
+\begin{align*}
+\Delta \nu_\mu & = \frac{f_R \lambda}{2} \\
+\therefore f_R & = \frac{2\Delta \nu_\mu}{\lambda} \\
+& = \frac{(2)(600)(10\times 10^9)}{3\times 10^8} \simeq 4000 \text{ Hz}
+\end{align*}
+
+The maximum ambiguous range can then be found from the above value of $f_R$.
+
+\begin{align*}
+R_u & = \frac{c}{2f_R} \\
+& = \frac{3\times 10^8}{(2)(4000)} \simeq 37500 \text{ m}
+\end{align*}
+
+}
+
+\question{b}{Suppose its frequency is changed to mid-Ku band and other parameters remain the same. Calculate $\Delta \nu_\mu$ and $R_u$.}{
+
+Altering the frequency to the mid-Ku band does not alter the structure of the pulses and therefore the maximum ambigious range remains the same at 37,500 m.  The shift in wavelength however does alter the maximum unambigious velocity interval.
+
+\begin{align*}
+\Delta \nu_\mu & = \frac{f_R\lambda}{2} \\
+& = \frac{4000}{2}\cdot\frac{3\times 10^8}{10\times 10^9} \simeq 60 \text{ m/s}
+\end{align*}
+
+}
 }
 
 \question{1.5}{Calculate range gate width $\Delta R$ in both meters and feet for $\tau=0.01, 0.1, 1, \text{and} 10 \mu$sec. What is the appropriate relationship between $\tau$ (nsec) and $\Delta R$ (feet)?}
