@@ -1,6 +1,6 @@
 \documentclass[letterpaper,10pt]{article}
 
-\usepackage[left=0.5in, right=0.5in, top=0.5in, bottom=0.5in]{geometry}
+\usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
 \usepackage{longtable}
 \usepackage{calc}
 \usepackage{amsmath}
@@ -9,28 +9,28 @@
 \newlength{\loseit}
 \newlength{\answidth}
 
-\newcommand{\question}[4][1]{
-\setlength{\loseit}{0.5in * #1}
-\setlength{\answidth}{8.5in - 1in - 0.5in - \loseit}
-\begin{minipage}[t]{.5in}
-#2
-\end{minipage}
-\begin{minipage}[t]{\answidth}
-#3
+\newcommand{\question}[3]{
+\begin{itemize}
+\item[{\makebox[1cm]{#1)}}] #2
 
 \vspace{.2in}
 
-#4
-\end{minipage}
+#3
+
+\end{itemize}
 
 \vspace{.2in}
 }
 
 \begin{document}
 
-\Large{Chapter 1 Homework}
+{\large Chapter 1 Homework}
 \hfill
-\Large{Justace Clutter}
+{\large Justace Clutter}
+
+\vspace{.1in}
+
+\hrule
 
 \vspace{.5in}
 
@@ -43,35 +43,123 @@ The absolute maximum emitted power is 6 kW and it does not deppend on the freque
 \question{1.2}
 {Consider a flat plate antenna ($\eta=0.5$) of area 1 m$^2$ operating at mid-C band.}
 {
-\question[2]{a}{Calculate its gain}
+\question{a}{Calculate its gain}
 {
 
 Antenna gain follows the following formula for cases such that the wavelength is much less than the aperature diameter:
 
-\begin{equation}
+\begin{equation*}
 G_0 = G(0,0) = \frac{4\pi A\eta}{\lambda^2}
-\end{equation}
+\end{equation*}
 
 The question requests the gain in the mid-C band which would be approximately 6 GHz ($\lambda = \frac{c}{f} = 0.03$ m).  Since the wavelength is much less than the effective diameter of the square antenna ($\sim$ 1m), then the above equation holds for this condition.
 
-\begin{equation}
+\begin{equation*}
 G_0 = G(0,0) = \frac{4\pi A\eta}{\lambda^2} = \frac{4\pi(1)(0.5)}{0.03^2} = 6981
-\end{equation}
+\end{equation*}
 }
 
-\question[2]{b}{Calculate its peak RCS in the midband of L, W, C, X, and Ku. What is the equation relating its gain to RCS, as a function of $\lambda$? (See Tables 3.1 and 3.2.)}{}
+\question{b}{Calculate its peak RCS in the midband of L, W, C, X, and Ku. What is the equation relating its gain to RCS, as a function of $\lambda$? (See Tables 3.1 and 3.2.)}{
+
+The peak RCS for a square antenna would be normal to the antenna aperture and is conveintly listed in table 3.2 as suggested.  The formula is reproduced below:
+
+\begin{equation*}
+\sigma = \frac{4\pi A^2}{\lambda^2}
+\end{equation*}
+
+The above equation does not take into account the geometrical efficiney of the antenna, $\eta$.  This can be inserted into the cross-section equation by letting $A\rightarrow A\eta$.  The resulting equation is the following,
+
+\begin{equation*}
+\sigma = \frac{4\pi (A\eta)^2}{\lambda^2}
+\end{equation*}
+
+
+<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
+
+
+f = function(A, eta, lambda) {
+  ((4.0 * pi) * (A*eta)^2) / lambda^2
+}
+
+# L, S, C, X, Ku
+
+LBandFreq  = 1.5e9 # Hz
+SBandFreq  = 3e9 # Hz
+CBandFreq  = 6e9 # Hz
+XBandFreq  = 10e9 # Hz
+KuBandFreq = 15e9 # Hz
+
+c = 3e8 # m/s
+
+LBandLambda = c / LBandFreq
+SBandLambda = c / SBandFreq
+CBandLambda = c / CBandFreq
+XBandLambda = c / XBandFreq
+KuBandLambda = c / KuBandFreq
+
+A = 1.0
+eta = 0.5
+
+L = f(A, eta, LBandLambda)
+S = f(A, eta, SBandLambda)
+C = f(A, eta, CBandLambda)
+X = f(A, eta, XBandLambda)
+Ku = f(A, eta, KuBandLambda)
+
+ls = c(LBandLambda, SBandLambda, CBandLambda, XBandLambda, KuBandLambda)
+lslab = c('L', 'S', 'C', 'X', 'Ku')
+lambdalims = c(min(ls), max(ls))
+lambda_w = diff(lambdalims)
+lambda_m = mean(lambdalims)
+lambdalims = lambda_m + (c(-1, 1) * 0.5 * lambda_w/0.8)
+if(lambdalims[1] < 0.01) {
+  lambdalims[1] = 0.01
+}
+
+@
+
+The peak RCS value in each of the desired bands is \Sexpr{sprintf('%.2f', L)} m$^2$, \Sexpr{sprintf('%.2f', S)} m$^2$, \Sexpr{sprintf('%.2f', C)} m$^2$, \Sexpr{sprintf('%.2f', X)} m$^2$, \Sexpr{sprintf('%.2f', Ku)} m$^2$ for the L, S, C, X, and Ku bands, respectively.
+
+<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
+
+require(ggplot2)
+require(scales)
+
+lambda = seq(lambdalims[1], lambdalims[2], by = diff(lambdalims) / 100)
+rcs = f(A, eta, lambda)
+data = data.frame(lambda = lambda, rcs = rcs)
+
+rcsinds = f(A, eta, ls)
+datainds = data.frame(lambda = ls, rcs = rcsinds)
+
+rp = ggplot(data) + theme_bw() +
+  geom_line(aes(x = lambda, y = rcs)) +
+  geom_point(data = datainds, aes(x = lambda, y = rcs), size = 2) +
+  geom_text(data = datainds, aes(x = lambda, y = rcs, label = lslab), hjust = -0.25, vjust = -0.25, size = 3) +
+  scale_y_continuous(trans=log_trans()) +
+  coord_trans(y="log") +
+  labs(x = expression(paste(lambda, ' (m)')), y = expression(paste('RCS (', m^{2}, ')')))
+rp
+
+#  scale_y_continuous(trans=log2_trans()) +
+
+@
+
+
+
+}
 }
 
 \question{1.3}
 {A mid-C band radar has the following:
 
-\begin{align*}
-P_{avg} & = 1 \text{ kW}\\
-G & = 30 \text{ dB}\\
-\tau_\text{dwell} & = 30 \text{ ms}\\
-T_s & = 580\text{K}\\
-L & = 6 \text{ dB}
-\end{align*}
+%\begin{align*}
+%P_{avg} & = 1 \text{ kW}\\
+%G & = 30 \text{ dB}\\
+%\tau_\text{dwell} & = 30 \text{ ms}\\
+%T_s & = 580\text{K}\\
+%L & = 6 \text{ dB}
+%\end{align*}
 
 Calculate the maximum range at which it can detect a target of $\sigma=-20 \text{dBm}^2$. Assume the SNR required for detection is 17 dB and $C_B=1$.
 }
@@ -98,12 +186,12 @@ R & = \left[\frac{P_{avg}G^2\lambda^2\sigma\tau_\text{dwell}}{(4\pi)^3(\text{SNR
 The solution of 48.9 is in the units of dBm which correlates to 77,600 m.
 }
 
-\question{1.3}
+\question{1.4}
 {A pulsed mid-X band radar has a maximum unambiguous velocity interval $\Delta \nu_\mu=600$ m/s. (Assume $\tau << \tau_R$.)}
 {
 
-\question[2]{a.}{What is its maximum unambiguous range $R_u$?}{}
-\question[2]{b.}{Suppose its frequency is changed to mid-Ku band and other parameters remain the same. Calculate $\Delta \nu_\mu$ and $R_u$.}{}
+\question{a}{What is its maximum unambiguous range $R_u$?}{}
+\question{b}{Suppose its frequency is changed to mid-Ku band and other parameters remain the same. Calculate $\Delta \nu_\mu$ and $R_u$.}{}
 
 }
 
