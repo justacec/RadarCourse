@@ -1,4 +1,53 @@
-\documentclass[letterpaper,10pt]{article}
+\documentclass[letterpaper,10pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 
 \usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
 \usepackage{longtable}
@@ -18,7 +67,7 @@
 
 \vspace{.2in}
 }
-
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
 {\large Chapter 1 Homework}
@@ -71,76 +120,20 @@ The above equation does not take into account the geometrical efficiney of the a
 \end{equation*}
 
 
-<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
 
 
-f = function(A, eta, lambda) {
-  ((4.0 * pi) * (A*eta)^2) / lambda^2
+The peak RCS value in each of the desired bands is 78.54 m$^2$, 314.16 m$^2$, 1256.64 m$^2$, 3490.66 m$^2$, 7853.98 m$^2$ for the L, S, C, X, and Ku bands, respectively.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-2} 
+
 }
 
-# L, S, C, X, Ku
 
-LBandFreq  = 1.5e9 # Hz
-SBandFreq  = 3e9 # Hz
-CBandFreq  = 6e9 # Hz
-XBandFreq  = 10e9 # Hz
-KuBandFreq = 15e9 # Hz
 
-c = 3e8 # m/s
-
-LBandLambda = c / LBandFreq
-SBandLambda = c / SBandFreq
-CBandLambda = c / CBandFreq
-XBandLambda = c / XBandFreq
-KuBandLambda = c / KuBandFreq
-
-A = 1.0
-eta = 0.5
-
-L = f(A, eta, LBandLambda)
-S = f(A, eta, SBandLambda)
-C = f(A, eta, CBandLambda)
-X = f(A, eta, XBandLambda)
-Ku = f(A, eta, KuBandLambda)
-
-ls = c(LBandLambda, SBandLambda, CBandLambda, XBandLambda, KuBandLambda)
-lslab = c('L', 'S', 'C', 'X', 'Ku')
-lambdalims = c(min(ls), max(ls))
-lambda_w = diff(lambdalims)
-lambda_m = mean(lambdalims)
-lambdalims = lambda_m + (c(-1, 1) * 0.5 * lambda_w/0.8)
-if(lambdalims[1] < 0.01) {
-  lambdalims[1] = 0.01
-}
-
-@
-
-The peak RCS value in each of the desired bands is \Sexpr{sprintf('%.2f', L)} m$^2$, \Sexpr{sprintf('%.2f', S)} m$^2$, \Sexpr{sprintf('%.2f', C)} m$^2$, \Sexpr{sprintf('%.2f', X)} m$^2$, \Sexpr{sprintf('%.2f', Ku)} m$^2$ for the L, S, C, X, and Ku bands, respectively.
-
-<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
-
-require(ggplot2)
-require(scales)
-
-lambda = seq(lambdalims[1], lambdalims[2], by = diff(lambdalims) / 100)
-rcs = f(A, eta, lambda)
-data = data.frame(lambda = lambda, rcs = rcs)
-
-rcsinds = f(A, eta, ls)
-datainds = data.frame(lambda = ls, rcs = rcsinds)
-
-rp = ggplot(data) + theme_bw() +
-  geom_line(aes(x = lambda, y = rcs)) +
-  geom_point(data = datainds, aes(x = lambda, y = rcs), size = 2) +
-  geom_text(data = datainds, aes(x = lambda, y = rcs, label = lslab), hjust = -0.25, vjust = -0.25, size = 3) +
-  scale_y_continuous(trans=log_trans()) +
-  coord_trans(y="log") +
-  labs(x = expression(paste(lambda, ' (m)')), y = expression(paste('RCS (', m^{2}, ')')))
-rp
-
-#  scale_y_continuous(trans=log2_trans()) +
-
-@
+\end{knitrout}
 
 
 
@@ -228,25 +221,7 @@ The range gate is provided with the equation:
 \Delta R = \frac{c\tau}{2}
 \end{equation*}
 
-<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
 
-f = function(t, s = 1) {
-  ((3.0e8 * t) / 2.0) * s
-}
-
-scale_meters_to_feet = 3.2808
-
-dr_0.01_meters = f(0.01e-3)
-dr_0.1_meters = f(0.1e-3)
-dr_1_meters = f(1e-3)
-dr_10_meters = f(10e-3)
-
-dr_0.01_feet = f(0.01e-3, scale_meters_to_feet)
-dr_0.1_feet = f(0.1e-3, scale_meters_to_feet)
-dr_1_feet = f(1e-3, scale_meters_to_feet)
-dr_10_feet = f(10e-3, scale_meters_to_feet)
-
-@
 
 
 Results would typically be given in meters but the units can be transformed to feet by using the scaling factor of 3.2808 feet/meter.  The range gate width is:
@@ -254,10 +229,10 @@ Results would typically be given in meters but the units can be transformed to f
 \begin{center}
 \begin{tabular}{l|ll} \hline
 $\tau$ ($\mu$ s) & $\Delta R$ (meters) & $\Delta R$ (feet) \\ \hline
-0.01 & \Sexpr{sprintf('%0.0f', dr_0.01_meters)} & \Sexpr{sprintf('%0.0f', dr_0.01_feet)} \\
-0.1 & \Sexpr{sprintf('%0.0f', dr_0.1_meters)} & \Sexpr{sprintf('%0.0f', dr_0.1_feet)} \\
-1 & \Sexpr{sprintf('%0.0f', dr_1_meters)} & \Sexpr{sprintf('%0.0f', dr_1_feet)} \\
-10 & \Sexpr{sprintf('%0.0f', dr_10_meters)} & \Sexpr{sprintf('%0.0f', dr_10_feet)} \\
+0.01 & 1500 & 4921 \\
+0.1 & 15000 & 49212 \\
+1 & 150000 & 492120 \\
+10 & 1500000 & 4921200 \\
 \end{tabular}
 \end{center}
 
