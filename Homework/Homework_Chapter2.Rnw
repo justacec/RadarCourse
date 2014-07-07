@@ -33,7 +33,28 @@
 
 \question{2.1}{
 Show that $F=(S/N)_{\text{in}}/(S/N)_{\text{out}}=(N_\text{out}/N_\text{in})(S_\text{in}/S_\text{out})=(N_\text{out}/N_\text{in})(1/G_\text{LNA})$ if and only if $T_\text{ant}=T_\text{radar}=T_0$.
-}{}
+}{
+
+Let's start be going backwards from the equations in the problem to show that that $F = (N_\text{out}/N_\text{in})(1/G_\text{LNA}) = (S/N)_{\text{in}}/(S/N)_{\text{out}}$.  
+
+\begin{align*}
+F & = \frac{N_\text{out}}{N_\text{in}G_\text{LNA}} \\
+  & = \frac{N_\text{out}}{N_\text{in}\left(\frac{S_\text{out}}{S_\text{in}}\right)} \\
+  & = \left(\frac{N_\text{out}}{N_\text{in}}\right)\left(\frac{S_\text{in}}{S_\text{out}}\right) \\
+  & = \left(\frac{S_\text{in}}{N_\text{in}}\right)\left(\frac{N_\text{out}}{S_\text{out}}\right) \\
+  & = \left.\left(\frac{S_\text{in}}{N_\text{in}}\right)\middle/\left(\frac{S_\text{out}}{N_\text{out}}\right)\right.
+\end{align*}
+
+In the strictest sense, the noise factor is the ratio of the noise out of a practicl amplifier, in this case the LNA, and the noise out of an ideal amplifier at the standard temperture $T_0=290$ K.  Up to this point there have been no assumptions on what the form of $N_\text{in}$ and $N_\text{out}$ were.  Using equation 2.10 from the text we can compose forms for $N_\text{in}$ and $N_\text{out}$.  Since the strict definiton of $F$ assumes an ideal amplifier, $N_
+
+In the above equations, there were no attempts to explain what $N_\text{in}$ and $N_\text{out}$ were and what they contained.  The noise factor is a property of the amplifier, in this case the LNA.  
+
+In the first line of the solution, the core definition of the noise factor is used.  Namely, this is that the noise factor is equal to the ratio of the measured output noise to the noise that would be generated after the LNA assuming an overall system temperature of $T_0=290$ K.  
+
+
+In this work there were no assumptions made on the input noise and it was simply denoted as $N_\text{in}$.  This noise represents the noise intorduced in the system up to the LNA which includes noise from the antenna and the radar itself.  
+
+}
 
 \question{2.2}{
 Show that, if we define $F2=(S/N)_\text{in}/(S/N)_\text{out}$ and it $T_\text{ant}=T_\text{radar}$, then $T_\text{rcvr}=(F2-1)T_\text{ant}$.
