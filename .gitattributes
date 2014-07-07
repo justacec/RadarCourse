@@ -11,6 +11,7 @@
 *.Rnw text eol=crlf
 *.R text old=crlf
 *.Rmd text eol=crlf
+*.svg text eol=crlf
 
 # Denote all files that are truly binary and should not be modified.
 *.png binary
