@@ -21,7 +21,7 @@
 
 \begin{document}
 
-{\large Chapter 1 Homework}
+{\large Homework 1}
 \hfill
 {\large Justace Clutter}
 
@@ -31,13 +31,13 @@
 
 \vspace{.5in}
 
-\question{1.1}
+\question{1}
 {Consider a radar with a pulsed waveform (sinusoidally varying electric field) with a peak power of 6 kW.  What is the absolute maximum power emitted? Does it depend on frequency? Polarization?}
 {
 The absolute maximum emitted power is 6 kW and it does not deppend on the frequency or the polorization.
 }
 
-\question{1.2}
+\question{2}
 {Consider a flat plate antenna ($\eta=0.5$) of area 1 m$^2$ operating at mid-C band.}
 {
 \question{a}{Calculate its gain}
@@ -147,16 +147,16 @@ rp
 }
 }
 
-\question{1.3}
+\question{3}
 {A mid-C band radar has the following:
 
-%\begin{align*}
-%P_{avg} & = 1 \text{ kW}\\
-%G & = 30 \text{ dB}\\
-%\tau_\text{dwell} & = 30 \text{ ms}\\
-%T_s & = 580\text{K}\\
-%L & = 6 \text{ dB}
-%\end{align*}
+\begin{align*}
+P_{avg} & = 1 \text{ kW}\\
+G & = 30 \text{ dB}\\
+\tau_\text{dwell} & = 30 \text{ ms}\\
+T_s & = 580\text{K}\\
+L & = 6 \text{ dB}
+\end{align*}
 
 Calculate the maximum range at which it can detect a target of $\sigma=-20 \text{dBm}^2$. Assume the SNR required for detection is 17 dB and $C_B=1$.
 }
@@ -183,101 +183,117 @@ R & = \left[\frac{P_{avg}G^2\lambda^2\sigma\tau_\text{dwell}}{(4\pi)^3(\text{SNR
 The solution of 48.9 is in the units of dBm which correlates to 77,600 m.
 }
 
-\question{1.4}
-{A pulsed mid-X band radar has a maximum unambiguous velocity interval $\Delta \nu_\mu=600$ m/s. (Assume $\tau << \tau_R$.)}
-{
+% \question{1.4}
+% {A pulsed mid-X band radar has a maximum unambiguous velocity interval $\Delta \nu_\mu=600$ m/s. (Assume $\tau << \tau_R$.)}
+% {
+% 
+% \question{a}{What is its maximum unambiguous range $R_u$?}{
+% The first operation is to use the $\Delta \mu_\mu$ value stated to determine the $f_R$.  This can then be used to determine the maximum unambiguous range.  The value for $f_R$ is found in the following way:
+% 
+% \begin{align*}
+% \Delta \nu_\mu & = \frac{f_R \lambda}{2} \\
+% \therefore f_R & = \frac{2\Delta \nu_\mu}{\lambda} \\
+% & = \frac{(2)(600)(10\times 10^9)}{3\times 10^8} \simeq 4000 \text{ Hz}
+% \end{align*}
+% 
+% The maximum ambiguous range can then be found from the above value of $f_R$.
+% 
+% \begin{align*}
+% R_u & = \frac{c}{2f_R} \\
+% & = \frac{3\times 10^8}{(2)(4000)} \simeq 37500 \text{ m}
+% \end{align*}
+% 
+% }
+% 
+% \question{b}{Suppose its frequency is changed to mid-Ku band and other parameters remain the same. Calculate $\Delta \nu_\mu$ and $R_u$.}{
+% 
+% Altering the frequency to the mid-Ku band does not alter the structure of the pulses and therefore the maximum ambigious range remains the same at 37,500 m.  The shift in wavelength however does alter the maximum unambigious velocity interval.
+% 
+% \begin{align*}
+% \Delta \nu_\mu & = \frac{f_R\lambda}{2} \\
+% & = \frac{4000}{2}\cdot\frac{3\times 10^8}{10\times 10^9} \simeq 60 \text{ m/s}
+% \end{align*}
+% 
+% }
+% }
 
-\question{a}{What is its maximum unambiguous range $R_u$?}{
-The first operation is to use the $\Delta \mu_\mu$ value stated to determine the $f_R$.  This can then be used to determine the maximum unambiguous range.  The value for $f_R$ is found in the following way:
+% \question{1.5}{Calculate range gate width $\Delta R$ in both meters and feet for $\tau=0.01, 0.1, 1, \text{and} 10 \text{ } \mu$sec. What is the appropriate relationship between $\tau$ (nsec) and $\Delta R$ (feet)?}
+% {
+% 
+% % There are approximatly 0.3048 meters per foot or 3.2808 feet per meter  
+% 
+% The range gate is provided with the equation:
+% 
+% \begin{equation*}
+% \Delta R = \frac{c\tau}{2}
+% \end{equation*}
+% 
+% <<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
+% 
+% f = function(t, s = 1) {
+%   ((3.0e8 * t) / 2.0) * s
+% }
+% 
+% scale_meters_to_feet = 3.2808
+% 
+% dr_0.01_meters = f(0.01e-3)
+% dr_0.1_meters = f(0.1e-3)
+% dr_1_meters = f(1e-3)
+% dr_10_meters = f(10e-3)
+% 
+% dr_0.01_feet = f(0.01e-3, scale_meters_to_feet)
+% dr_0.1_feet = f(0.1e-3, scale_meters_to_feet)
+% dr_1_feet = f(1e-3, scale_meters_to_feet)
+% dr_10_feet = f(10e-3, scale_meters_to_feet)
+% 
+% @
+% 
+% 
+% Results would typically be given in meters but the units can be transformed to feet by using the scaling factor of 3.2808 feet/meter.  The range gate width is:
+% 
+% \begin{center}
+% \begin{tabular}{l|ll} \hline
+% $\tau$ ($\mu$ s) & $\Delta R$ (meters) & $\Delta R$ (feet) \\ \hline
+% 0.01 & \Sexpr{sprintf('%0.0f', dr_0.01_meters)} & \Sexpr{sprintf('%0.0f', dr_0.01_feet)} \\
+% 0.1 & \Sexpr{sprintf('%0.0f', dr_0.1_meters)} & \Sexpr{sprintf('%0.0f', dr_0.1_feet)} \\
+% 1 & \Sexpr{sprintf('%0.0f', dr_1_meters)} & \Sexpr{sprintf('%0.0f', dr_1_feet)} \\
+% 10 & \Sexpr{sprintf('%0.0f', dr_10_meters)} & \Sexpr{sprintf('%0.0f', dr_10_feet)} \\
+% \end{tabular}
+% \end{center}
+% 
+% The equation listed above can have explicit scaling factors inserted to accept nanoseconds and report in feet by applying the appropriate conversion ratio, $\rho$.  The ratio is determined below:
+% 
+% \begin{equation*}
+% \rho = \frac{1 \text{ (m)}}{1 \text{ (sec)}}\cdot\frac{3.2808 \text{ (feet)}}{1 \text{ (m)}}\cdot\frac{1 \text{ (sec)}}{1\times 10^9 \text{ (nsec)}} \simeq 3.28\times 10^{-9}
+% \end{equation*}
+% 
+% The modified equation taking this scaling factor into account is:
+% 
+% \begin{equation*}
+% \Delta R = \frac{c\tau}{2}\rho \rightarrow \frac{\left(3\times 10^8\right)\tau}{2}\left(3.28\times 10^{-9}\right) \simeq 0.046\tau \text{ (feet)}
+% \end{equation*}
+% 
+% With this relationship, for each nanosecond of time you add to the pulse length, there is a corresponding increase of 0.05 feet in the range gate width.
+% 
+% }
+
+\question{4}{For the radar used in the “Estimate of Signal-to-Noise Ratio”, compute, for the received signal, the power, the $E$ field (volts/meter), the $B$ field (tesla; $B = \mu_oH$), and the photons/second.
+}{
+The parameters of the radar are such that:
 
 \begin{align*}
-\Delta \nu_\mu & = \frac{f_R \lambda}{2} \\
-\therefore f_R & = \frac{2\Delta \nu_\mu}{\lambda} \\
-& = \frac{(2)(600)(10\times 10^9)}{3\times 10^8} \simeq 4000 \text{ Hz}
+P_\text{peak} & = 10^5 \text{ W} & R & = 20,000\text{ m}\\
+G & = 40\text{ dB} & T_S & = 580\text{ K}\\
+\lambda & = 0.1\text{ m} & C_B & = 1\\
+\sigma & = 0.01\text{ m}^2 & L & = 7 \text{ dB}\\
+\tau & = 100 ns
 \end{align*}
 
-The maximum ambiguous range can then be found from the above value of $f_R$.
-
-\begin{align*}
-R_u & = \frac{c}{2f_R} \\
-& = \frac{3\times 10^8}{(2)(4000)} \simeq 37500 \text{ m}
-\end{align*}
+The 
 
 }
 
-\question{b}{Suppose its frequency is changed to mid-Ku band and other parameters remain the same. Calculate $\Delta \nu_\mu$ and $R_u$.}{
-
-Altering the frequency to the mid-Ku band does not alter the structure of the pulses and therefore the maximum ambigious range remains the same at 37,500 m.  The shift in wavelength however does alter the maximum unambigious velocity interval.
-
-\begin{align*}
-\Delta \nu_\mu & = \frac{f_R\lambda}{2} \\
-& = \frac{4000}{2}\cdot\frac{3\times 10^8}{10\times 10^9} \simeq 60 \text{ m/s}
-\end{align*}
-
-}
-}
-
-\question{1.5}{Calculate range gate width $\Delta R$ in both meters and feet for $\tau=0.01, 0.1, 1, \text{and} 10 \text{ } \mu$sec. What is the appropriate relationship between $\tau$ (nsec) and $\Delta R$ (feet)?}
-{
-
-% There are approximatly 0.3048 meters per foot or 3.2808 feet per meter  
-
-The range gate is provided with the equation:
-
-\begin{equation*}
-\Delta R = \frac{c\tau}{2}
-\end{equation*}
-
-<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
-
-f = function(t, s = 1) {
-  ((3.0e8 * t) / 2.0) * s
-}
-
-scale_meters_to_feet = 3.2808
-
-dr_0.01_meters = f(0.01e-3)
-dr_0.1_meters = f(0.1e-3)
-dr_1_meters = f(1e-3)
-dr_10_meters = f(10e-3)
-
-dr_0.01_feet = f(0.01e-3, scale_meters_to_feet)
-dr_0.1_feet = f(0.1e-3, scale_meters_to_feet)
-dr_1_feet = f(1e-3, scale_meters_to_feet)
-dr_10_feet = f(10e-3, scale_meters_to_feet)
-
-@
-
-
-Results would typically be given in meters but the units can be transformed to feet by using the scaling factor of 3.2808 feet/meter.  The range gate width is:
-
-\begin{center}
-\begin{tabular}{l|ll} \hline
-$\tau$ ($\mu$ s) & $\Delta R$ (meters) & $\Delta R$ (feet) \\ \hline
-0.01 & \Sexpr{sprintf('%0.0f', dr_0.01_meters)} & \Sexpr{sprintf('%0.0f', dr_0.01_feet)} \\
-0.1 & \Sexpr{sprintf('%0.0f', dr_0.1_meters)} & \Sexpr{sprintf('%0.0f', dr_0.1_feet)} \\
-1 & \Sexpr{sprintf('%0.0f', dr_1_meters)} & \Sexpr{sprintf('%0.0f', dr_1_feet)} \\
-10 & \Sexpr{sprintf('%0.0f', dr_10_meters)} & \Sexpr{sprintf('%0.0f', dr_10_feet)} \\
-\end{tabular}
-\end{center}
-
-The equation listed above can have explicit scaling factors inserted to accept nanoseconds and report in feet by applying the appropriate conversion ratio, $\rho$.  The ratio is determined below:
-
-\begin{equation*}
-\rho = \frac{1 \text{ (m)}}{1 \text{ (sec)}}\cdot\frac{3.2808 \text{ (feet)}}{1 \text{ (m)}}\cdot\frac{1 \text{ (sec)}}{1\times 10^9 \text{ (nsec)}} \simeq 3.28\times 10^{-9}
-\end{equation*}
-
-The modified equation taking this scaling factor into account is:
-
-\begin{equation*}
-\Delta R = \frac{c\tau}{2}\rho \rightarrow \frac{\left(3\times 10^8\right)\tau}{2}\left(3.28\times 10^{-9}\right) \simeq 0.046\tau \text{ (feet)}
-\end{equation*}
-
-With this relationship, for each nanosecond of time you add to the pulse length, there is a corresponding increase of 0.05 feet in the range gate width.
-
-}
-
-\question{1.6}{A lossless radar with gain $G$ and wavelength $\lambda$ is located at a height $H$ above an infinite, flat planar, perfectly conducting surface, with boresight directed perpendicular to the surface. Compute $\Gamma$.}
+\question{5}{A lossless radar with gain $G$ and wavelength $\lambda$ is located at a height $H$ above an infinite, flat planar, perfectly conducting surface, with boresight directed perpendicular to the surface. Compute $\Gamma$.}
 {
 
 Since the reflector is infinite in size and perfectly conducting, this problem can be reduced to the situation of an emitter that is exactly $2H$ away.  The received power is then going to be determined by assuming spherical spreading from the emitter and the cross-section of the receiving antenna.  This is taken directly from Equation 1.20 in the text.  In this case, $L\rightarrow 0$ since it is a lossless antenna and $R\rightarrow 2H$.  The modified equation is:
