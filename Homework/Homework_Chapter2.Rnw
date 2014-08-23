@@ -31,6 +31,100 @@
 
 \vspace{.5in}
 
+\question{1.4}
+{A pulsed mid-X band radar has a maximum unambiguous velocity interval $\Delta \nu_\mu=600$ m/s. (Assume $\tau << \tau_R$.)}
+{
+
+\question{a}{What is its maximum unambiguous range $R_u$?}{
+The first operation is to use the $\Delta \mu_\mu$ value stated to determine the $f_R$.  This can then be used to determine the maximum unambiguous range.  The value for $f_R$ is found in the following way:
+
+\begin{align*}
+\Delta \nu_\mu & = \frac{f_R \lambda}{2} \\
+\therefore f_R & = \frac{2\Delta \nu_\mu}{\lambda} \\
+& = \frac{(2)(600)(10\times 10^9)}{3\times 10^8} \simeq 4000 \text{ Hz}
+\end{align*}
+
+The maximum ambiguous range can then be found from the above value of $f_R$.
+
+\begin{align*}
+R_u & = \frac{c}{2f_R} \\
+& = \frac{3\times 10^8}{(2)(4000)} \simeq 37500 \text{ m}
+\end{align*}
+
+}
+
+\question{b}{Suppose its frequency is changed to mid-Ku band and other parameters remain the same. Calculate $\Delta \nu_\mu$ and $R_u$.}{
+
+Altering the frequency to the mid-Ku band does not alter the structure of the pulses and therefore the maximum ambigious range remains the same at 37,500 m.  The shift in wavelength however does alter the maximum unambigious velocity interval.
+
+\begin{align*}
+\Delta \nu_\mu & = \frac{f_R\lambda}{2} \\
+& = \frac{4000}{2}\cdot\frac{3\times 10^8}{10\times 10^9} \simeq 60 \text{ m/s}
+\end{align*}
+
+}
+}
+
+\question{1.5}{Calculate range gate width $\Delta R$ in both meters and feet for $\tau=0.01, 0.1, 1, \text{ and } 10 \text{ } \mu$sec. What is the appropriate relationship between $\tau$ (nsec) and $\Delta R$ (feet)?}
+{
+
+% There are approximatly 0.3048 meters per foot or 3.2808 feet per meter  
+
+The range gate is provided with the equation:
+
+\begin{equation*}
+\Delta R = \frac{c\tau}{2}
+\end{equation*}
+
+<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
+
+f = function(t, s = 1) {
+  ((3.0e8 * t) / 2.0) * s
+}
+
+scale_meters_to_feet = 3.2808
+
+dr_0.01_meters = f(0.01e-3)
+dr_0.1_meters = f(0.1e-3)
+dr_1_meters = f(1e-3)
+dr_10_meters = f(10e-3)
+
+dr_0.01_feet = f(0.01e-3, scale_meters_to_feet)
+dr_0.1_feet = f(0.1e-3, scale_meters_to_feet)
+dr_1_feet = f(1e-3, scale_meters_to_feet)
+dr_10_feet = f(10e-3, scale_meters_to_feet)
+
+@
+
+
+Results would typically be given in meters but the units can be transformed to feet by using the scaling factor of 3.2808 feet/meter.  The range gate width is:
+
+\begin{center}
+\begin{tabular}{l|ll} \hline
+$\tau$ ($\mu$ s) & $\Delta R$ (meters) & $\Delta R$ (feet) \\ \hline
+0.01 & \Sexpr{sprintf('%0.0f', dr_0.01_meters)} & \Sexpr{sprintf('%0.0f', dr_0.01_feet)} \\
+0.1 & \Sexpr{sprintf('%0.0f', dr_0.1_meters)} & \Sexpr{sprintf('%0.0f', dr_0.1_feet)} \\
+1 & \Sexpr{sprintf('%0.0f', dr_1_meters)} & \Sexpr{sprintf('%0.0f', dr_1_feet)} \\
+10 & \Sexpr{sprintf('%0.0f', dr_10_meters)} & \Sexpr{sprintf('%0.0f', dr_10_feet)} \\
+\end{tabular}
+\end{center}
+
+The equation listed above can have explicit scaling factors inserted to accept nanoseconds and report in feet by applying the appropriate conversion ratio, $\rho$.  The ratio is determined below:
+
+\begin{equation*}
+\rho = \frac{1 \text{ (m)}}{1 \text{ (sec)}}\cdot\frac{3.2808 \text{ (feet)}}{1 \text{ (m)}}\cdot\frac{1 \text{ (sec)}}{1\times 10^9 \text{ (nsec)}} \simeq 3.28\times 10^{-9}
+\end{equation*}
+
+The modified equation taking this scaling factor into account is:
+
+\begin{equation*}
+\Delta R = \frac{c\tau}{2}\rho \rightarrow \frac{\left(3\times 10^8\right)\tau}{2}\left(3.28\times 10^{-9}\right) \simeq 0.046\tau \text{ (feet)}
+\end{equation*}
+
+With this relationship, for each nanosecond of time you add to the pulse length, there is a corresponding increase of 0.05 feet in the range gate width.
+
+}
+
 \question{2.1}{
 Show that $F=(S/N)_{\text{in}}/(S/N)_{\text{out}}=(N_\text{out}/N_\text{in})(S_\text{in}/S_\text{out})=(N_\text{out}/N_\text{in})(1/G_\text{LNA})$ if and only if $T_\text{ant}=T_\text{radar}=T_0$.
 }{
@@ -76,206 +170,206 @@ Show that the standard deviation of the quantization error and an A/D converter 
 \end{equation*}
 }{}
 
-\question{2.6}{
-Consider a spherical wave emitted from a point antenna.  For the far field, we want the wave to be essentially planar over an aperture of width D at range R.  If the far-field criterion is that the wavefront deviate no more than $\frac{\lambda}{16}$ from a plane (the Fraunhofer criterion), show that $R$ (far field) $= 2D^2/\lambda$.  Calculate the near- and far-field ``boundaries'' ($R=2D^2/\lambda$), for $D=1$m, at L, S, X, Ku, and Ka bands.
-}{
-
-The following solution depends on the small angle approximation:
-
-\begin{equation*}
-x = r\left(1-\frac{\theta^2}{2}\right) \qquad \text{ and } \qquad y = r\theta \text{.}
-\end{equation*}
-
-\begin{minipage}{3in}
-\begin{center}
-\includegraphics[width=3in]{Figures/HW2_2_6__1.pdf}
-\end{center}
-\end{minipage}
-\begin{minipage}{3in}
-
-\begin{align*}
-y & = \left.R\theta\right|_{y=\frac{D}{2}} \rightarrow \theta = \frac{D}{2R} \\
-\therefore x & = R\left(1-\frac{\left(\frac{D}{2R}\right)^2}{2}\right) \\
-d & = R - x \\
-& = R - R\left(1-\frac{\left(\frac{D}{2R}\right)^2}{2}\right) \\
-\therefore R & = \frac{D^2}{8d}
-\end{align*}
-\end{minipage}
-
-Evaluating the final equation for $R$ with the substitution that $d=\frac{\lambda}{16}$ yields the final relationship for the far-field threshold range:
-
-\begin{equation*}
-R = 2\frac{D^2}{\lambda}
-\end{equation*}
-
-<<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
-
-require(ggplot2)
-
-Lt = 1
-LBandFreq  = 1.5e9 # Hz
-SBandFreq  = 3e9 # Hz
-XBandFreq  = 10e9 # Hz
-KuBandFreq = 15e9 # Hz
-
-c = 3e8 # m/s
-
-LBandLambda = c / LBandFreq
-SBandLambda = c / SBandFreq
-XBandLambda = c / XBandFreq
-KuBandLambda = c / KuBandFreq
-
-dist_L = 2 / LBandLambda
-dist_S = 2 / SBandLambda
-dist_X = 2 / XBandLambda
-dist_Ku = 2 / KuBandLambda
-
-X = seq(0, 3, by = 0.01)
-Lreps = rep(LBandLambda, length(X))
-Sreps = rep(SBandLambda, length(X))
-Xreps = rep(XBandLambda, length(X))
-Kureps = rep(KuBandLambda, length(X))
-Ltype = rep('L', length(X))
-Stype = rep('S', length(X))
-Xtype = rep('X', length(X))
-Kutype = rep('Ku', length(X))
-
-data = data.frame(x = rep(X, 4), lambda = c(Lreps, Sreps, Xreps, Kureps), type = c(Ltype, Stype, Xtype, Kutype))  
-data$r = 2 * (data$x^2) / data$lambda
-
-rp = ggplot(data) + theme_bw() +
-  geom_line(aes(x = x, y = r, color = type)) +
-  labs(x = 'D (m)', y = 'R (m)') +
-  scale_color_discrete(name = 'Band') +
-  theme(legend.key = element_blank())
-rp
-
-@
-
-The threshold range for the far field for the L band, S Band, X Band, and Ku Band is \Sexpr{dist_L} m, \Sexpr{dist_S} m, \Sexpr{dist_X} m, \Sexpr{dist_Ku} m, respectively.
-
-}
-
-\question{2.7}{
-Using Huygen's principle, derive Snell's law of refraction between two media: $n_1\sin\theta_1=n_2\sin\theta_2$, where $n$ is the index of refraction and $\theta$ is the incidence angle (zero for normal incidence).
-}{}
-
-\question{2.8}{
-Calculate the coordinate-transform matrices between the $(\theta, \phi)$ coordinates and the $(\alpha, \epsilon)$ coordinates.  Suppose that $\alpha=-30$ degrees and $\epsilon=45$ degrees; find $\theta,\phi$.  Suppose that $\theta=45$ degrees and $\phi=30$ degrees; find $\alpha, \epsilon$.
-}{}
-
-\question{2.9}{
-For an infinite slit aperture of width $L$ parallel to the $x$ axis, with $\boldsymbol{E}$ perpendicular to the slit edges --- $\boldsymbol{E}=(0, E_y, 0)$ --- in the $yz$ plane, show that $E_x=0$ and in the $yz$ plane, in polar coordinates,
-
-\begin{equation*}
-E_\theta(r, \theta) = jk\frac{e^{-jkr}}{2\pi r}E_yL\text{ sinc}\left(\frac{kL\sin\theta}{2}\right)
-\end{equation*}
-}{}
-
-\question{2.10}{
-For a finite rectangular aperture, $L_x$ by $L_y$, with $\boldsymbol{E}=\boldsymbol{E_0}$ parallel to $\boldsymbol{y}$, show that
-
-\begin{align*}
-E_\theta(r, \theta, \phi) & = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\sin\phi\text{ sinc}\left(\frac{kL_x}{2}\mu\right)\text{ sinc}\left(\frac{kL_y}{2}\nu\right) \\
-E_\phi(r, \theta, \phi) & = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\cos\theta\cos\phi\text{ sinc}\left(\frac{kL_x}{2}\mu\right)\text{ sinc}\left(\frac{kL_y}{2}\nu\right)
-\end{align*}
-
-where $\mu=\sin\theta\cos\phi$, $\nu=\sin\theta\sin\phi$. (The underlined factors are the obliquity factors.)  In the $E$ plane ($yz$ plane), $\phi=90$ degrees; show that
-
-\begin{equation*}
-E_\theta(r,\theta) = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\text{ sinc}\left(\frac{kL_y}{2}\sin\theta\right), \quad E_\phi = 0
-\end{equation*}
-
-In the $H$ plane ($xz$ plane), $\phi=0$ degrees; show that
-
-\begin{equation*}
-E_\theta(r,\theta) = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\cos\theta\text{ sinc}\left(\frac{kL_x}{2}\sin\theta\right), \quad E_\phi = 0
-\end{equation*}
-}{}
-
-\question{2.11}{
-For a circular aperture of radius $a$, with $\boldsymbol{E}=\boldsymbol{E}_0$ parallel to the aperture plane, show that
-
-\begin{align*}
-\boldsymbol{E} & = \left(\hat{\boldsymbol{\theta}}\cos\phi-\hat{\boldsymbol{\phi}}\sin\phi\cos\theta\right)jk\frac{e^{-jkr}}{2\pi r}\cdot \boldsymbol{E}_02\pi a^2\frac{J_1(ka\sin\theta)}{ka\sin\theta} \\
-f(\theta,\phi) & = f_1(\theta) = \frac{2J_1(ka\sin\theta)}{ka\sin\theta}
-\end{align*}
-}{}
-
-\question{2.12}{
-Show that for the infinite slit and its characteristic $\sin(x)/x\equiv \text{sinc}(x)$ pattern, the first sidelobe peak is -13.3 dB below the mainlobe peak; show that for the circular aperture, the first sidelobe peak is -17.6 dB below the mainlobe peak.
-}{}
-
-\question{2.13}{
-From the fundamental properties of a parabola, show that for a parabolic dish antenna with a point-source feed at the focal point and the aperture (planer surface within rim of dish) perpendicular to the axis of revolution, all radiation leaving the aperture has the same phase.
-}{
-
-The parabola is constructed such that the distance between any point on the curve and the focal point is the same as the distance between that same point and what is called the directex.  This is represented mathematically as
-
-\begin{equation*}
-|y+b| = \sqrt{x^2 + (y-b)^2}\text{.}
-\end{equation*}
-
-In the figure below, the directex is the horizontal dashed line below the $x$-axis and the above equation allows one state that the line segments $\overline{BF}$ and $\overline{BE}$ are the same length and that the line segments $\overline{CF}$ and $\overline{CD}$ are the same length.
-
-\begin{center}
-\includegraphics[width=4in]{Figures/HW2_2_13__1.pdf}
-\end{center}
-
-\begin{align*}
-\overline{AD} & = \overline{BE} & \\
-\overline{AD} & = \overline{BF} & \text{ Prop. of Parabola} \\
-\overline{AC} + \overline{CD} & = \overline{BF} & \text{ Substitution} \\
-\overline{AC} + \overline{CF} & = \overline{BF} & \text{ Prop. of Parabola} \\
-\overline{ACF} & = \overline{BF} & \\
-\end{align*}
-
-Since the line segments $\overline{ACF}$ and $\overline{BF}$ are the same length, the phase of the signals will be the same as the signal leaves the antenna.
-
-
-}
-
-\question{2.14}{
-For an axially symmetric parabolic reflector with a feed at the focus radiating isotropically with power $P$ a distance $d$ from the closest point on the reflector surface, show that the aperture illumination function $F(r)$ (W/m$^2$) is
-
-\begin{equation*}
-F(r) = \frac{P}{4\pi d^2}\cdot\frac{1}{\left(1+\frac{r^2}{4d^2}\right)^2}
-\end{equation*}
-}{}
-
-\question{2.15}{
-Show that, for an ideal rectangular or circular aperture where $\lambda >>$ aperture dimension, the sidelobe envelope (smooth line connecting the sidelobe peaks), measured in dBi, is independent of $\lambda$ or the aperture dimension.  (The International Radio Consultative Committee [CCIR] recommends that sidelobes for large circular apertures [D $> 100\lambda$] be below $G=29-25\log_{10}(\theta_\text{degrees})$ dBi [27].)
-}{}
-
-\question{2.16}{
-Consider a long ($N >> 1$) linear array of length $L$.  Suppose that the center $N/4$ elements burn out.  Develop a revised expression for the radiation pattern, for the mainlobe at 90 degrees (broadside), 45 degrees, and 0 degrees (endfire).
-}{}
-
-\question{2.17}{
-Show that 
-
-
-\begin{itemize}
-\renewcommand{\labelitemi}{$\bullet$}
-\item $kd < \pi \Rightarrow d < \lambda / 2$ (no grating lode occurs);
-\item $\pi < kd < 2\pi \Rightarrow \lambda / 2 < d < \lambda$ (a grating lobe may occur);
-\item $kd > 2\pi\Rightarrow d> \lambda$ (one of more grating lobes occur).
-\end{itemize}
-
-}{}
-
-\question{2.18}{
-Show that the criterion for no grating lobes (peak) is
-
-\begin{equation*}
-\frac{d}{\lambda}=\frac{1}{1+|\cos\theta|}
-\end{equation*}
-
-}{}
-
-\question{2.19}{
-If $\theta$ (mainlobe) $=30$ degrees, at what element spacing $(d/\lambda)$ do the peaks of the first, second, and third grating lobes appear?
-}{}
+% \question{2.6}{
+% Consider a spherical wave emitted from a point antenna.  For the far field, we want the wave to be essentially planar over an aperture of width D at range R.  If the far-field criterion is that the wavefront deviate no more than $\frac{\lambda}{16}$ from a plane (the Fraunhofer criterion), show that $R$ (far field) $= 2D^2/\lambda$.  Calculate the near- and far-field ``boundaries'' ($R=2D^2/\lambda$), for $D=1$m, at L, S, X, Ku, and Ka bands.
+% }{
+% 
+% The following solution depends on the small angle approximation:
+% 
+% \begin{equation*}
+% x = r\left(1-\frac{\theta^2}{2}\right) \qquad \text{ and } \qquad y = r\theta \text{.}
+% \end{equation*}
+% 
+% \begin{minipage}{3in}
+% \begin{center}
+% \includegraphics[width=3in]{Figures/HW2_2_6__1.pdf}
+% \end{center}
+% \end{minipage}
+% \begin{minipage}{3in}
+% 
+% \begin{align*}
+% y & = \left.R\theta\right|_{y=\frac{D}{2}} \rightarrow \theta = \frac{D}{2R} \\
+% \therefore x & = R\left(1-\frac{\left(\frac{D}{2R}\right)^2}{2}\right) \\
+% d & = R - x \\
+% & = R - R\left(1-\frac{\left(\frac{D}{2R}\right)^2}{2}\right) \\
+% \therefore R & = \frac{D^2}{8d}
+% \end{align*}
+% \end{minipage}
+% 
+% Evaluating the final equation for $R$ with the substitution that $d=\frac{\lambda}{16}$ yields the final relationship for the far-field threshold range:
+% 
+% \begin{equation*}
+% R = 2\frac{D^2}{\lambda}
+% \end{equation*}
+% 
+% <<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
+% 
+% require(ggplot2)
+% 
+% Lt = 1
+% LBandFreq  = 1.5e9 # Hz
+% SBandFreq  = 3e9 # Hz
+% XBandFreq  = 10e9 # Hz
+% KuBandFreq = 15e9 # Hz
+% 
+% c = 3e8 # m/s
+% 
+% LBandLambda = c / LBandFreq
+% SBandLambda = c / SBandFreq
+% XBandLambda = c / XBandFreq
+% KuBandLambda = c / KuBandFreq
+% 
+% dist_L = 2 / LBandLambda
+% dist_S = 2 / SBandLambda
+% dist_X = 2 / XBandLambda
+% dist_Ku = 2 / KuBandLambda
+% 
+% X = seq(0, 3, by = 0.01)
+% Lreps = rep(LBandLambda, length(X))
+% Sreps = rep(SBandLambda, length(X))
+% Xreps = rep(XBandLambda, length(X))
+% Kureps = rep(KuBandLambda, length(X))
+% Ltype = rep('L', length(X))
+% Stype = rep('S', length(X))
+% Xtype = rep('X', length(X))
+% Kutype = rep('Ku', length(X))
+% 
+% data = data.frame(x = rep(X, 4), lambda = c(Lreps, Sreps, Xreps, Kureps), type = c(Ltype, Stype, Xtype, Kutype))  
+% data$r = 2 * (data$x^2) / data$lambda
+% 
+% rp = ggplot(data) + theme_bw() +
+%   geom_line(aes(x = x, y = r, color = type)) +
+%   labs(x = 'D (m)', y = 'R (m)') +
+%   scale_color_discrete(name = 'Band') +
+%   theme(legend.key = element_blank())
+% rp
+% 
+% @
+% 
+% The threshold range for the far field for the L band, S Band, X Band, and Ku Band is \Sexpr{dist_L} m, \Sexpr{dist_S} m, \Sexpr{dist_X} m, \Sexpr{dist_Ku} m, respectively.
+% 
+% }
+% 
+% \question{2.7}{
+% Using Huygen's principle, derive Snell's law of refraction between two media: $n_1\sin\theta_1=n_2\sin\theta_2$, where $n$ is the index of refraction and $\theta$ is the incidence angle (zero for normal incidence).
+% }{}
+% 
+% \question{2.8}{
+% Calculate the coordinate-transform matrices between the $(\theta, \phi)$ coordinates and the $(\alpha, \epsilon)$ coordinates.  Suppose that $\alpha=-30$ degrees and $\epsilon=45$ degrees; find $\theta,\phi$.  Suppose that $\theta=45$ degrees and $\phi=30$ degrees; find $\alpha, \epsilon$.
+% }{}
+% 
+% \question{2.9}{
+% For an infinite slit aperture of width $L$ parallel to the $x$ axis, with $\boldsymbol{E}$ perpendicular to the slit edges --- $\boldsymbol{E}=(0, E_y, 0)$ --- in the $yz$ plane, show that $E_x=0$ and in the $yz$ plane, in polar coordinates,
+% 
+% \begin{equation*}
+% E_\theta(r, \theta) = jk\frac{e^{-jkr}}{2\pi r}E_yL\text{ sinc}\left(\frac{kL\sin\theta}{2}\right)
+% \end{equation*}
+% }{}
+% 
+% \question{2.10}{
+% For a finite rectangular aperture, $L_x$ by $L_y$, with $\boldsymbol{E}=\boldsymbol{E_0}$ parallel to $\boldsymbol{y}$, show that
+% 
+% \begin{align*}
+% E_\theta(r, \theta, \phi) & = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\sin\phi\text{ sinc}\left(\frac{kL_x}{2}\mu\right)\text{ sinc}\left(\frac{kL_y}{2}\nu\right) \\
+% E_\phi(r, \theta, \phi) & = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\cos\theta\cos\phi\text{ sinc}\left(\frac{kL_x}{2}\mu\right)\text{ sinc}\left(\frac{kL_y}{2}\nu\right)
+% \end{align*}
+% 
+% where $\mu=\sin\theta\cos\phi$, $\nu=\sin\theta\sin\phi$. (The underlined factors are the obliquity factors.)  In the $E$ plane ($yz$ plane), $\phi=90$ degrees; show that
+% 
+% \begin{equation*}
+% E_\theta(r,\theta) = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\text{ sinc}\left(\frac{kL_y}{2}\sin\theta\right), \quad E_\phi = 0
+% \end{equation*}
+% 
+% In the $H$ plane ($xz$ plane), $\phi=0$ degrees; show that
+% 
+% \begin{equation*}
+% E_\theta(r,\theta) = jk\frac{e^{-jkr}}{2\pi r}E_0L_xL_y\cos\theta\text{ sinc}\left(\frac{kL_x}{2}\sin\theta\right), \quad E_\phi = 0
+% \end{equation*}
+% }{}
+% 
+% \question{2.11}{
+% For a circular aperture of radius $a$, with $\boldsymbol{E}=\boldsymbol{E}_0$ parallel to the aperture plane, show that
+% 
+% \begin{align*}
+% \boldsymbol{E} & = \left(\hat{\boldsymbol{\theta}}\cos\phi-\hat{\boldsymbol{\phi}}\sin\phi\cos\theta\right)jk\frac{e^{-jkr}}{2\pi r}\cdot \boldsymbol{E}_02\pi a^2\frac{J_1(ka\sin\theta)}{ka\sin\theta} \\
+% f(\theta,\phi) & = f_1(\theta) = \frac{2J_1(ka\sin\theta)}{ka\sin\theta}
+% \end{align*}
+% }{}
+% 
+% \question{2.12}{
+% Show that for the infinite slit and its characteristic $\sin(x)/x\equiv \text{sinc}(x)$ pattern, the first sidelobe peak is -13.3 dB below the mainlobe peak; show that for the circular aperture, the first sidelobe peak is -17.6 dB below the mainlobe peak.
+% }{}
+% 
+% \question{2.13}{
+% From the fundamental properties of a parabola, show that for a parabolic dish antenna with a point-source feed at the focal point and the aperture (planer surface within rim of dish) perpendicular to the axis of revolution, all radiation leaving the aperture has the same phase.
+% }{
+% 
+% The parabola is constructed such that the distance between any point on the curve and the focal point is the same as the distance between that same point and what is called the directex.  This is represented mathematically as
+% 
+% \begin{equation*}
+% |y+b| = \sqrt{x^2 + (y-b)^2}\text{.}
+% \end{equation*}
+% 
+% In the figure below, the directex is the horizontal dashed line below the $x$-axis and the above equation allows one state that the line segments $\overline{BF}$ and $\overline{BE}$ are the same length and that the line segments $\overline{CF}$ and $\overline{CD}$ are the same length.
+% 
+% \begin{center}
+% \includegraphics[width=4in]{Figures/HW2_2_13__1.pdf}
+% \end{center}
+% 
+% \begin{align*}
+% \overline{AD} & = \overline{BE} & \\
+% \overline{AD} & = \overline{BF} & \text{ Prop. of Parabola} \\
+% \overline{AC} + \overline{CD} & = \overline{BF} & \text{ Substitution} \\
+% \overline{AC} + \overline{CF} & = \overline{BF} & \text{ Prop. of Parabola} \\
+% \overline{ACF} & = \overline{BF} & \\
+% \end{align*}
+% 
+% Since the line segments $\overline{ACF}$ and $\overline{BF}$ are the same length, the phase of the signals will be the same as the signal leaves the antenna.
+% 
+% 
+% }
+% 
+% \question{2.14}{
+% For an axially symmetric parabolic reflector with a feed at the focus radiating isotropically with power $P$ a distance $d$ from the closest point on the reflector surface, show that the aperture illumination function $F(r)$ (W/m$^2$) is
+% 
+% \begin{equation*}
+% F(r) = \frac{P}{4\pi d^2}\cdot\frac{1}{\left(1+\frac{r^2}{4d^2}\right)^2}
+% \end{equation*}
+% }{}
+% 
+% \question{2.15}{
+% Show that, for an ideal rectangular or circular aperture where $\lambda >>$ aperture dimension, the sidelobe envelope (smooth line connecting the sidelobe peaks), measured in dBi, is independent of $\lambda$ or the aperture dimension.  (The International Radio Consultative Committee [CCIR] recommends that sidelobes for large circular apertures [D $> 100\lambda$] be below $G=29-25\log_{10}(\theta_\text{degrees})$ dBi [27].)
+% }{}
+% 
+% \question{2.16}{
+% Consider a long ($N >> 1$) linear array of length $L$.  Suppose that the center $N/4$ elements burn out.  Develop a revised expression for the radiation pattern, for the mainlobe at 90 degrees (broadside), 45 degrees, and 0 degrees (endfire).
+% }{}
+% 
+% \question{2.17}{
+% Show that 
+% 
+% 
+% \begin{itemize}
+% \renewcommand{\labelitemi}{$\bullet$}
+% \item $kd < \pi \Rightarrow d < \lambda / 2$ (no grating lode occurs);
+% \item $\pi < kd < 2\pi \Rightarrow \lambda / 2 < d < \lambda$ (a grating lobe may occur);
+% \item $kd > 2\pi\Rightarrow d> \lambda$ (one of more grating lobes occur).
+% \end{itemize}
+% 
+% }{}
+% 
+% \question{2.18}{
+% Show that the criterion for no grating lobes (peak) is
+% 
+% \begin{equation*}
+% \frac{d}{\lambda}=\frac{1}{1+|\cos\theta|}
+% \end{equation*}
+% 
+% }{}
+% 
+% \question{2.19}{
+% If $\theta$ (mainlobe) $=30$ degrees, at what element spacing $(d/\lambda)$ do the peaks of the first, second, and third grating lobes appear?
+% }{}
 
 
 \end{document}
