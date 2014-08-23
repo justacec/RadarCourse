@@ -180,102 +180,8 @@ R & = \left[\frac{P_{avg}G^2\lambda^2\sigma\tau_\text{dwell}}{(4\pi)^3(\text{SNR
 & = \frac{1}{4}(195.79) = 48.9 \text{ dBm}
 \end{align*}
 
-The solution of 48.9 is in the units of dBm which correlates to 77,600 m.
+The solution of 48.9 is in the units of dBm which correlates to 77,600 m which is approximatly 42 NM.
 }
-
-% \question{1.4}
-% {A pulsed mid-X band radar has a maximum unambiguous velocity interval $\Delta \nu_\mu=600$ m/s. (Assume $\tau << \tau_R$.)}
-% {
-% 
-% \question{a}{What is its maximum unambiguous range $R_u$?}{
-% The first operation is to use the $\Delta \mu_\mu$ value stated to determine the $f_R$.  This can then be used to determine the maximum unambiguous range.  The value for $f_R$ is found in the following way:
-% 
-% \begin{align*}
-% \Delta \nu_\mu & = \frac{f_R \lambda}{2} \\
-% \therefore f_R & = \frac{2\Delta \nu_\mu}{\lambda} \\
-% & = \frac{(2)(600)(10\times 10^9)}{3\times 10^8} \simeq 4000 \text{ Hz}
-% \end{align*}
-% 
-% The maximum ambiguous range can then be found from the above value of $f_R$.
-% 
-% \begin{align*}
-% R_u & = \frac{c}{2f_R} \\
-% & = \frac{3\times 10^8}{(2)(4000)} \simeq 37500 \text{ m}
-% \end{align*}
-% 
-% }
-% 
-% \question{b}{Suppose its frequency is changed to mid-Ku band and other parameters remain the same. Calculate $\Delta \nu_\mu$ and $R_u$.}{
-% 
-% Altering the frequency to the mid-Ku band does not alter the structure of the pulses and therefore the maximum ambigious range remains the same at 37,500 m.  The shift in wavelength however does alter the maximum unambigious velocity interval.
-% 
-% \begin{align*}
-% \Delta \nu_\mu & = \frac{f_R\lambda}{2} \\
-% & = \frac{4000}{2}\cdot\frac{3\times 10^8}{10\times 10^9} \simeq 60 \text{ m/s}
-% \end{align*}
-% 
-% }
-% }
-
-% \question{1.5}{Calculate range gate width $\Delta R$ in both meters and feet for $\tau=0.01, 0.1, 1, \text{and} 10 \text{ } \mu$sec. What is the appropriate relationship between $\tau$ (nsec) and $\Delta R$ (feet)?}
-% {
-% 
-% % There are approximatly 0.3048 meters per foot or 3.2808 feet per meter  
-% 
-% The range gate is provided with the equation:
-% 
-% \begin{equation*}
-% \Delta R = \frac{c\tau}{2}
-% \end{equation*}
-% 
-% <<echo = FALSE, fig.width = 4, fig.height = 2, fig.align='center', message = FALSE>>=
-% 
-% f = function(t, s = 1) {
-%   ((3.0e8 * t) / 2.0) * s
-% }
-% 
-% scale_meters_to_feet = 3.2808
-% 
-% dr_0.01_meters = f(0.01e-3)
-% dr_0.1_meters = f(0.1e-3)
-% dr_1_meters = f(1e-3)
-% dr_10_meters = f(10e-3)
-% 
-% dr_0.01_feet = f(0.01e-3, scale_meters_to_feet)
-% dr_0.1_feet = f(0.1e-3, scale_meters_to_feet)
-% dr_1_feet = f(1e-3, scale_meters_to_feet)
-% dr_10_feet = f(10e-3, scale_meters_to_feet)
-% 
-% @
-% 
-% 
-% Results would typically be given in meters but the units can be transformed to feet by using the scaling factor of 3.2808 feet/meter.  The range gate width is:
-% 
-% \begin{center}
-% \begin{tabular}{l|ll} \hline
-% $\tau$ ($\mu$ s) & $\Delta R$ (meters) & $\Delta R$ (feet) \\ \hline
-% 0.01 & \Sexpr{sprintf('%0.0f', dr_0.01_meters)} & \Sexpr{sprintf('%0.0f', dr_0.01_feet)} \\
-% 0.1 & \Sexpr{sprintf('%0.0f', dr_0.1_meters)} & \Sexpr{sprintf('%0.0f', dr_0.1_feet)} \\
-% 1 & \Sexpr{sprintf('%0.0f', dr_1_meters)} & \Sexpr{sprintf('%0.0f', dr_1_feet)} \\
-% 10 & \Sexpr{sprintf('%0.0f', dr_10_meters)} & \Sexpr{sprintf('%0.0f', dr_10_feet)} \\
-% \end{tabular}
-% \end{center}
-% 
-% The equation listed above can have explicit scaling factors inserted to accept nanoseconds and report in feet by applying the appropriate conversion ratio, $\rho$.  The ratio is determined below:
-% 
-% \begin{equation*}
-% \rho = \frac{1 \text{ (m)}}{1 \text{ (sec)}}\cdot\frac{3.2808 \text{ (feet)}}{1 \text{ (m)}}\cdot\frac{1 \text{ (sec)}}{1\times 10^9 \text{ (nsec)}} \simeq 3.28\times 10^{-9}
-% \end{equation*}
-% 
-% The modified equation taking this scaling factor into account is:
-% 
-% \begin{equation*}
-% \Delta R = \frac{c\tau}{2}\rho \rightarrow \frac{\left(3\times 10^8\right)\tau}{2}\left(3.28\times 10^{-9}\right) \simeq 0.046\tau \text{ (feet)}
-% \end{equation*}
-% 
-% With this relationship, for each nanosecond of time you add to the pulse length, there is a corresponding increase of 0.05 feet in the range gate width.
-% 
-% }
 
 \question{4}{For the radar used in the “Estimate of Signal-to-Noise Ratio”, compute, for the received signal, the power, the $E$ field (volts/meter), the $B$ field (tesla; $B = \mu_oH$), and the photons/second.
 }{
@@ -286,12 +192,86 @@ P_\text{peak} & = 10^5 \text{ W} & R & = 20,000\text{ m}\\
 G & = 40\text{ dB} & T_S & = 580\text{ K}\\
 \lambda & = 0.1\text{ m} & C_B & = 1\\
 \sigma & = 0.01\text{ m}^2 & L & = 7 \text{ dB}\\
-\tau & = 100 ns
+\tau & = 100 \text{ ns}
 \end{align*}
 
-The 
+\textbf{Power:}
+
+The power of the received signal is derived from the following equation:
+
+<<echo = FALSE, message = FALSE>>=
+
+Pt = 10^5
+G = 10^4
+R = 20000
+sigma = 0.01
+lambda = 0.1
+L = 10^0.7
+
+Pr = Pt * ((G^2)*(lambda^2)*sigma)/(((4*pi)^3)*(R^4)*L)
+
+@
+
+\begin{equation*}
+P_R = P_T\frac{G^2\lambda^2\sigma}{\left(4\pi\right)^3R^4L}
+\end{equation*}
+
+Since most of the inputs are in mks, I will continue to use that unit system and convert the gain and the losses to ratios of $10^4$ and $10^{0.7}$, respectivley.  With these conversions the result is as follows:
+
+\begin{align*}
+P_R & = 10^5\frac{\left(10^4\right)^2\left(0.1\right)^2\left(0.01\right)}{\left(4*pi\right)^3\left(20000\right)^4\left(10^{0.7}\right)} \\
+ & = 6.28\times 10^{-13} \text{ W}
+\end{align*}
+
+\textbf{Electric and Magnetic Fields:}
+
+The electric and magnetic fields can be expressed as:
+
+\begin{equation*}
+E = \sqrt{\frac{S}{c\varepsilon_0}} \qquad B = \sqrt{\frac{S}{c\mu_0^3}} \quad \left\{\text{given that }B = \mu_0H\right\}
+\end{equation*}
+
+<<echo = FALSE, message=FALSE>>=
+
+S = Pr
+ep0 = 8.8541878176e-12
+mu0 = 4*pi*1e-7
+c = 3e8
+
+E = sqrt((S)/(c*ep0))
+B = sqrt((S)/(c*mu0^3))
+
+@
+
+Since $S$ is the magnitude of the Poynting vector which is simply the power which was derived in the previous step, the result is easily obtained as $1.54\times 10^{-5}$ V/m and $0.03$ T for the electric field and the magnetic field, respectively.
+
+\textbf{Number of Photons:}
+
+The flux can be determined by taking the power, which is in J/s, and dividing it by the energy of the photon.  The energy of th photon is given by $E=\frac{hc}{\lambda}$ where $h$ is the plank constant of $6.626\times 10^{-34}$ Js.
+
+<<echo = FALSE, message=FALSE>>=
+h = 6.626e-34
+c = 3e8
+S = Pr
+lambda = 0.1
+
+N = (S*lambda)/(h*c)
+@
+
+\begin{equation*}
+N_\text{Photons} = \frac{S\lambda}{hc} = \frac{\left(6.28\times 10^{-13}\right)\left(0.1\right)}{\left(6.626\times 10^{-34}\right)\left(3\times 10^8\right)} = 3.16\times 10^{11} \text{ photons/s/m}^2
+\end{equation*}
+
+Though this seems like a lot we need to factor in the effective area of the antenna.  This can be determined by using the following equation:
+
+\begin{align*}
+A_e = \frac{G\lambda^2}{4\pi} = \frac{\left(10^4\right)\left(0.1^2\right)}{4\pi} = \frac{25}{\pi} = 78.5 \text{ m}^2
+\end{align*}
+
+Scaling the above result for the number of photons per area per second results in a total of $2.5\times 10^{13}$ photons per second reaching the antenna.  This seems a bit large to me which indicates that either I have a lack of understanding in scale or I have a very strong understanding of the probability of a mistake in the previous work.
 
 }
+
 
 \question{5}{A lossless radar with gain $G$ and wavelength $\lambda$ is located at a height $H$ above an infinite, flat planar, perfectly conducting surface, with boresight directed perpendicular to the surface. Compute $\Gamma$.}
 {
