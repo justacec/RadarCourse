@@ -21,7 +21,7 @@
 
 \begin{document}
 
-{\large Chapter 2 Homework}
+{\large Presentation 2 Homework}
 \hfill
 {\large Justace Clutter}
 
@@ -129,38 +129,184 @@ With this relationship, for each nanosecond of time you add to the pulse length,
 Show that $F=(S/N)_{\text{in}}/(S/N)_{\text{out}}=(N_\text{out}/N_\text{in})(S_\text{in}/S_\text{out})=(N_\text{out}/N_\text{in})(1/G_\text{LNA})$ if and only if $T_\text{ant}=T_\text{radar}=T_0$.
 }{
 
-Let's start be going backwards from the equations in the problem to show that that $F = (N_\text{out}/N_\text{in})(1/G_\text{LNA}) = (S/N)_{\text{in}}/(S/N)_{\text{out}}$.  
+Using the chain of equalities above, the ratio of the input and the output S/N from the point of view of the signal amplifier can be written as a ratio of the output noise from the amplier to the noise from its input.
 
 \begin{align*}
-F & = \frac{N_\text{out}}{N_\text{in}G_\text{LNA}} \\
-  & = \frac{N_\text{out}}{N_\text{in}\left(\frac{S_\text{out}}{S_\text{in}}\right)} \\
-  & = \left(\frac{N_\text{out}}{N_\text{in}}\right)\left(\frac{S_\text{in}}{S_\text{out}}\right) \\
-  & = \left(\frac{S_\text{in}}{N_\text{in}}\right)\left(\frac{N_\text{out}}{S_\text{out}}\right) \\
-  & = \left.\left(\frac{S_\text{in}}{N_\text{in}}\right)\middle/\left(\frac{S_\text{out}}{N_\text{out}}\right)\right.
+(S/N)_{\text{in}}/(S/N)_{\text{out}} & = \frac{N_\text{out}}{N_\text{in}G_\text{LNA}}
 \end{align*}
 
-In the strictest sense, the noise factor is the ratio of the noise out of a practical amplifier, in this case the LNA, and the noise out of an ideal amplifier at the standard temperature $T_0=290$ K.  Up to this point there have been no assumptions on what the form of $N_\text{in}$ and $N_\text{out}$ were.  Using equation 2.10 from the text we can compose forms for $N_\text{in}$ and $N_\text{out}$.  Since the strict definition of $F$ assumes an ideal amplifier, $N_1$.
+In the above context I will let $N_\text{in} = k\left[\frac{T_\text{ant}}{L_\text{Radar}} + T_\text{Radar}\left(1-\frac{1}{L_\text{Radar}}\right)\right]B = k\alpha B$ and $N_\text{out} = N_\text{in}G + kT_\text{rcvr}BG$
 
-In the above equations, there were no attempts to explain what $N_\text{in}$ and $N_\text{out}$ were and what they contained.  The noise factor is a property of the amplifier, in this case the LNA.  
+\begin{align*}
+\frac{N_\text{out}}{N_\text{in}G_\text{LNA}} & = \frac{k\alpha BG + kT_\text{rcvr}BG}{k\alpha BG} \\
+& = \frac{k\alpha BG}{k\alpha BG} + \frac{kT_\text{rcvr}BG}{k\alpha BG} \\
+& = 1 + \frac{T_\text{rcvr}}{\alpha} \\
+& = 1 + \frac{(F-1)T_0}{\alpha} \\
+\therefore\ \ \frac{(S/N)_{\text{in}}}{(S/N)_{\text{out}}} & = 1 + \frac{(F-1)T_0}{\alpha}
+\end{align*}
 
-In the first line of the solution, the core definition of the noise factor is used.  Namely, this is that the noise factor is equal to the ratio of the measured output noise to the noise that would be generated after the LNA assuming an overall system temperature of $T_0=290$ K.  
+This can now be solved for $F$ in terms of the other quantites and the $\alpha$ term can be resubstituted for a final form.
 
+\begin{align*}
+F & = \frac{\alpha}{T_0}\left[\frac{(S/N)_{\text{in}}}{(S/N)_{\text{out}}}-1\right]+1\\
+& = \frac{\frac{T_\text{ant}}{L_\text{Radar}} + T_\text{Radar}\left(1-\frac{1}{L_\text{Radar}}\right)}{T_0}\left[\frac{(S/N)_{\text{in}}}{(S/N)_{\text{out}}}-1\right]+1
+\end{align*}
 
-In this work there were no assumptions made on the input noise and it was simply denoted as $N_\text{in}$.  This noise represents the noise introduced in the system up to the LNA which includes noise from the antenna and the radar itself.  
+As can be seen in the final form of the equation, $F = \frac{(S/N)_{\text{in}}}{(S/N)_{\text{out}}}$ only when the numerator of the first fraction is equal to $T_0$.  This can only occur if $T_\text{ant} = T_\text{Radar} = T_0$.  
 
 }
 
 \question{2.2}{
-Show that, if we define $F2=(S/N)_\text{in}/(S/N)_\text{out}$ and it $T_\text{ant}=T_\text{radar}$, then $T_\text{rcvr}=(F2-1)T_\text{ant}$.
-}{}
+Show that, if we define $F2=(S/N)_\text{in}/(S/N)_\text{out}$ and if $T_\text{ant}=T_\text{radar}$, then $T_\text{rcvr}=(F2-1)T_\text{ant}$.
+}{
+
+Repurposing steps from Problem 2.1, the following is a good starting point.
+
+\begin{equation*}
+\frac{(S/N)_{\text{in}}}{(S/N)_{\text{out}}} = 1 + \frac{T_\text{rcvr}}{\alpha}\text{ ,}
+\end{equation*}
+
+where $\alpha = \frac{T_\text{ant}}{L_\text{Radar}} + T_\text{Radar}\left(1-\frac{1}{L_\text{Radar}}\right)$.  If $T_\text{ant} = T_\text{Radar}$, then I can replace $\alpha$ with $T_\text{ant}$.  This results in the following:
+
+\begin{align*}
+\frac{(S/N)_{\text{in}}}{(S/N)_{\text{out}}} & = 1 + \frac{T_\text{rcvr}}{T_\text{ant}} \\
+\therefore\ \ T_\text{rcvr} & = \left[\frac{(S/N)_{\text{in}}}{(S/N)_{\text{out}}}-1\right]T_\text{ant} \\
+& = \left(F2-1\right)T_\text{ant}
+\end{align*}
+
+
+
+}
 
 \question{2.3}{
 Consider a sensitive radar observing targets against deep space ($T_\text{ant}=3\text{K}$), with an LNA cooled with liquid helium to $T_\text{rcvr}=4.2\text{K}$.  If $L_\text{radar}=1$, what is the noise figure in decibels?  What is $T_\text{sys}$?
-}{}
+}{
+
+The noise figure can be determined soley from the $T_\text{rcvr}$ value of 4.2K.  By inverting the general formula for $T_\text{rcvr}$ in terms of $F$ and substituting the values the result can be found.
+
+\begin{align*}
+T_\text{rcvr} & = (F-1)T_0\\
+\therefore\ \ F = \frac{T_\text{rcvr}}{T_0}+1\\
+& = \frac{4.2}{290} + 1\\
+& \simeq 1.014
+\end{align*}
+
+The value of 1.014 in decibels is found by applying the function $g(x) = 10log_{10}(x)$.  The final noise figure in decibels is 0.06 dB.
+
+The value of $T_\text{sys}$ is found by substitution of the given values.
+
+\begin{align*}
+T_\text{sys} & = \frac{T_\text{ant}}{L_\text{Radar}} + T_\text{Radar}\left(1-\frac{1}{L_\text{Radar}}\right) + T_\text{rcvr} \\
+& = 3 + 4.2 = 7.2\text{ K}
+\end{align*}
+
+Please note that in the above, $T_\text{Radar}$ is not needed since the losses from the radar are equal to 1.  
+
+}
 
 \question{2.4}{
 In the front-end circuit shown in Figure 2.11, the designer has put a system gain control, in the form of a variable attenuator, after the first LNA.  Sketch the variation of overall system gain and system noise figure as this attenuator is varied over its full range. (Assume that $T_\text{ant}=T_\text{radar}=T_0$.)
-}{}
+
+\begin{center}
+\includegraphics[width=5in]{Figures/HW2_2_4__1.png}
+\end{center}
+
+
+}{
+
+The overall system gain is simply found by adding the decible versions of $G_1$, $G_2$, and the attenuation:
+
+\begin{equation*}
+G_\text{sys} = G_1 + G_2 + A\qquad\text{ (all in decibles),}
+\end{equation*}
+
+where the attenuation is identified as $A$.The overall system noise factor can be found by mimicing the proceedure found in section 2.2.11 of the text where it discusses the cascading of multiple amplifiers.  The primary difference is that the attenuation needs to be added into the proceedure in the correct place.  The output noise of the first amplifier is $G_1kT_0B+G_1N_1$.  This noise then needs to be scaled by the attenuation and then passed to the second amplifier as the input.  The final noise out of the second amplifier is the following:
+
+\begin{align*}
+N_o & = G_2A\left(G_1kT_0B+G_1N_1\right) + G_2N_2 \\
+& = G_1G_2AkT_0B + G_1G_2AN_1 + G_2N_2
+\end{align*}
+
+By dividing this by the noise all of the way out of the dual amplifier setup, $G_1G_2AkT_0B$, the overall noise factor is found:
+
+\begin{align*}
+F & = 1 + \frac{N_1}{kT_0B}+\frac{N_2}{G_1AkT_0B} \\
+& = F_1 + \frac{F_2-1}{G_1A}
+\end{align*}
+
+The overall system gain and the overall system noise factor is presented in the Figure below.
+
+<<echo = FALSE, fig.width = 5, fig.height = 3.5, fig.align='center', message = FALSE>>=
+
+require(ggplot2)
+require(grid)
+require(gtable)
+
+g1 = 25
+g2 = 30
+n1 = 2
+n2 = 10
+at = seq(-40, 0, length.out = 100)
+
+g1 = rep(g1, length(at))
+g2 = rep(g2, length(at))
+n1 = rep(n1, length(at))
+n2 = rep(n2, length(at))
+
+
+NF = function(g1, n1, g2, n2, a) {
+  g1 = 10^(g1/10)
+  g2 = 10^(g2/10)
+  n1 = 10^(n1/10)
+  n2 = 10^(n2/10)
+  a = 10^(a/10)
+  
+  return(10*log10(n1 + ((n2-1)/(g1*a))))
+}
+
+data = data.frame(at = at, nf = NF(g1, n1, g2, n2, at), g = g1+g2+at)
+data = data.frame(at = rep(at, 2), type = c(rep('Noise Factor', length(at)), rep('Overall Gain', length(at))), val = c(NF(g1, n1, g2, n2, at), g1 + g2 + at))
+
+
+# rp1 = ggplot(data) +
+#   geom_line(aes(x = at, y = nf), size = 1.5, color = 'blue') +
+#   labs(x = 'Attenuation (dB)', y = 'Noise Figure (dB)') +
+#   theme_bw() + theme(panel.grid = element_blank())
+# 
+# rp2 = ggplot(data) +
+#   geom_line(aes(x = at, y = g), size = 1.5, color = 'red') +
+#   labs(x = 'Attenuation (dB)', y = 'Overall Gain (dB)') +
+#   theme_bw() + theme(panel.grid = element_blank()) %+replace% theme(panel.background = element_rect(fill = NA))
+# 
+# g1 <- ggplot_gtable(ggplot_build(rp1))
+# g2 <- ggplot_gtable(ggplot_build(rp2))
+# 
+# pp <- c(subset(g1$layout, name == "panel", se = t:r))
+# g <- gtable_add_grob(g1, g2$grobs[[which(g2$layout$name == "panel")]], pp$t, 
+#     pp$l, pp$b, pp$l)
+# 
+# ia <- which(g2$layout$name == "axis-l")
+# ga <- g2$grobs[[ia]]
+# ax <- ga$children[[2]]
+# ax$widths <- rev(ax$widths)
+# ax$grobs <- rev(ax$grobs)
+# ax$grobs[[1]]$x <- ax$grobs[[1]]$x - unit(1, "npc") + unit(0.15, "cm")
+# g <- gtable_add_cols(g, g2$widths[g2$layout[ia, ]$l], length(g$widths) - 1)
+# g <- gtable_add_grob(g, ax, pp$t, length(g$widths) - 1, pp$b)
+# 
+# grid.draw(g)
+
+rp = ggplot(data) + theme_bw() +
+  geom_line(aes(x = at, y = val, color = type), size = 1) +
+  scale_color_discrete(name = '') +
+  labs(x = 'Attenuation (dB)', y = 'Decibels') +
+  theme(panel.grid = element_blank(), legend.key = element_blank(), legend.justification = c(0,1), legend.position = c(0,1))
+rp
+
+
+@
+
+}
 
 \question{2.5}{
 Show that the standard deviation of the quantization error and an A/D converter is
