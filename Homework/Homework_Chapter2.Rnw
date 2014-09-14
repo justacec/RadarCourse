@@ -314,7 +314,26 @@ Show that the standard deviation of the quantization error and an A/D converter 
 \begin{equation*}
 \sigma_\epsilon = \frac{\text{\textit{least significant bit}}}{\sqrt{12}}
 \end{equation*}
-}{}
+}{
+
+The can be determined by calculating the expectation value of the squared voltage error as the input voltage to the A/D transits through its dynamic range.  Letting the variable $x$ denote time, one cycle of the sawtooth shaped voltage error is bound by $-\frac{E_0}{2}\leq x\leq\frac{E_0}{2}$.  While the signal transits this space, the probabilty distribution of the error is uniform and encoded as $p(x)=\frac{1}{E_0}$.  The function of the error voltage in this space is $f(x) = x$. Putting all of this together, to find the mean squared error we simply need to determine the expectation value of $f(x)^2$.
+
+\begin{align*}
+\text{MSE} & = \int_{-\frac{E_0}{2}}^\frac{E_0}{2}f(x)^2p(x)dx \\
+& = \int_{-\frac{E_0}{2}}^\frac{E_0}{2}x^2\frac{1}{E_0}dx \\
+& = \frac{1}{E_0}\left[\frac{x^3}{3}\right]_{-\frac{E_0}{2}}^\frac{E_0}{2} \\
+& = \frac{1}{3E_0}\left[\frac{E_0^3}{8} + \frac{E_0^3}{8}\right] \\
+& = \frac{1}{3E_0}\frac{2E_0^3}{8}\\
+& = \frac{E_0^2}{12}
+\end{align*}
+
+The standard deviation is the square root of the mean squared error and therefore, based on the above result for the MSE, the standard deviation is then:
+
+\begin{equation*}
+\sigma = \frac{E_0}{\sqrt{12}}
+\end{equation*}
+
+}
 
 % \question{2.6}{
 % Consider a spherical wave emitted from a point antenna.  For the far field, we want the wave to be essentially planar over an aperture of width D at range R.  If the far-field criterion is that the wavefront deviate no more than $\frac{\lambda}{16}$ from a plane (the Fraunhofer criterion), show that $R$ (far field) $= 2D^2/\lambda$.  Calculate the near- and far-field ``boundaries'' ($R=2D^2/\lambda$), for $D=1$m, at L, S, X, Ku, and Ka bands.
