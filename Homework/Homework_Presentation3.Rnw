@@ -1,0 +1,58 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+
+\newcommand{\question}[3]{
+\begin{itemize}
+\item[{\makebox[1cm]{#1)}}] #2
+
+\vspace{.2in}
+
+#3
+
+\end{itemize}
+
+\vspace{.2in}
+}
+
+\begin{document}
+
+{\large Presentation 3 Homework}
+\hfill
+{\large Justace Clutter}
+
+\vspace{.1in}
+
+\hrule
+
+\vspace{.5in}
+
+\question{1}{
+Verify that $h(t)=\int_{-\infty}^{\infty}H(f)e^{j2\pi ft}df$.
+}{}
+
+\question{2}{
+Verify that if $h(t)=K, H(f)=K\delta(f)$ and that if $h(t)=K\delta(t), H(f)=K$.
+}{}
+
+\question{3}{
+Verify that if $h(t)=\sum\limits_{n=-\infty}^{\infty}\delta(t-nT), H(f)=\frac{1}{T}\sum\limits_{-\infty}^{\infty}\delta\left(f-\frac{n}{T}\right)$.
+}{}
+
+\question{4}{
+Verify that, if $h(t)\leftrightarrow H(f), h(t-t_0)\leftrightarrow H(f)e^{-j2\pi ft_0}$.
+}{}
+
+\question{5}{
+Verify that, if $h(t)$ is even, then $H(f)$ is real, and that if $h(t)$ is odd, then $H(f)$ is imaginary.
+}{}
+
+\question{6}{
+Verify that $x(t)\ast h(t)=\int_{-\infty}^{\infty}h(t)\ast x(t-\tau)d\tau$.
+}{}
+
+\end{document}
