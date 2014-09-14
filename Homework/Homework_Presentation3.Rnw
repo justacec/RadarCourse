@@ -52,7 +52,7 @@ Verify that, if $h(t)$ is even, then $H(f)$ is real, and that if $h(t)$ is odd, 
 }{}
 
 \question{6}{
-Verify that $x(t)\ast h(t)=\int_{-\infty}^{\infty}h(t)\ast x(t-\tau)d\tau$.
+Verify that $x(t)\ast h(t)=\int_{-\infty}^{\infty}h(t)x(t-\tau)d\tau$.
 }{}
 
 \end{document}
