@@ -21,7 +21,7 @@
 
 \begin{document}
 
-{\large Presentation 3 Homework}
+{\large Presentation 6 Homework}
 \hfill
 {\large Justace Clutter}
 
