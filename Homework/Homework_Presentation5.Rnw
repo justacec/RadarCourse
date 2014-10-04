@@ -1,0 +1,34 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+
+\newcommand{\question}[3]{
+\begin{itemize}
+\item[{\makebox[1cm]{#1)}}] #2
+
+\vspace{.2in}
+
+#3
+
+\end{itemize}
+
+\vspace{.2in}
+}
+
+\begin{document}
+
+{\large Presentation 3 Homework}
+\hfill
+{\large Justace Clutter}
+
+\vspace{.1in}
+
+\hrule
+
+\vspace{.5in}
+
+\end{document}
