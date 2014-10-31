@@ -31,4 +31,102 @@
 
 \vspace{.5in}
 
+\question{1}{Consider a spherical wave emitted from a ``point'' antenna.  For the ``far-field'', it is desired that the wave be ``planar'' over an aperature of width $D$ at range $R$.  The far-field criterion is that the wave front deviate no more than $\lambda/16$ from a plane (the Fraunhofer criterion); show that $R(\text{far-field})=2D^2/\lambda$.}
+{
+
+The following solution depends on the small angle approximation:
+
+\begin{equation*}
+x = r\left(1-\frac{\theta^2}{2}\right) \qquad \text{ and } \qquad y = r\theta \text{.}
+\end{equation*}
+
+\begin{minipage}{3in}
+\begin{center}
+\includegraphics[width=3in]{Figures/HW2_2_6__1.pdf}
+\end{center}
+\end{minipage}
+\begin{minipage}{3in}
+
+\begin{align*}
+y & = \left.R\theta\right|_{y=\frac{D}{2}} \rightarrow \theta = \frac{D}{2R} \\
+\therefore x & = R\left(1-\frac{\left(\frac{D}{2R}\right)^2}{2}\right) \\
+d & = R - x \\
+& = R - R\left(1-\frac{\left(\frac{D}{2R}\right)^2}{2}\right) \\
+\therefore R & = \frac{D^2}{8d}
+\end{align*}
+\end{minipage}
+
+Evaluating the final equation for $R$ with the substitution that $d=\frac{\lambda}{16}$ yields the final relationship for the far-field threshold range:
+
+\begin{equation*}
+R = 2\frac{D^2}{\lambda}
+\end{equation*}
+
+
+}
+
+\question{2}{Calculate the near/far-field ``boundary'' ($R=2D^2/\lambda$), for $D=1$m, at L, S, X, Ku, and Ka bands.}
+{
+
+<<echo = FALSE, fig.width = 5, fig.height = 2.5, fig.align='center', message = FALSE>>=
+
+require(ggplot2)
+
+Lt = 1
+LBandFreq  = 1.5e9 # Hz
+SBandFreq  = 3e9 # Hz
+XBandFreq  = 10e9 # Hz
+KuBandFreq = 15e9 # Hz
+
+c = 3e8 # m/s
+
+LBandLambda = c / LBandFreq
+SBandLambda = c / SBandFreq
+XBandLambda = c / XBandFreq
+KuBandLambda = c / KuBandFreq
+
+dist_L = 2 / LBandLambda
+dist_S = 2 / SBandLambda
+dist_X = 2 / XBandLambda
+dist_Ku = 2 / KuBandLambda
+
+X = seq(0, 3, by = 0.01)
+Lreps = rep(LBandLambda, length(X))
+Sreps = rep(SBandLambda, length(X))
+Xreps = rep(XBandLambda, length(X))
+Kureps = rep(KuBandLambda, length(X))
+Ltype = rep('L', length(X))
+Stype = rep('S', length(X))
+Xtype = rep('X', length(X))
+Kutype = rep('Ku', length(X))
+
+data = data.frame(x = rep(X, 4), lambda = c(Lreps, Sreps, Xreps, Kureps), type = c(Ltype, Stype, Xtype, Kutype))  
+data$r = 2 * (data$x^2) / data$lambda
+
+rp = ggplot(data) + theme_bw() +
+  geom_line(aes(x = x, y = r, color = type)) +
+  labs(x = 'D (m)', y = 'R (m)') +
+  scale_color_discrete(name = 'Band') +
+  theme(legend.key = element_blank())
+rp
+
+@
+
+The threshold range for the far field for $D=1$m for the L band, S Band, X Band, and Ku Band is \Sexpr{sprintf('%.2f', dist_L)} m, \Sexpr{sprintf('%.2f', dist_S)} m, \Sexpr{sprintf('%.2f', dist_X)} m, \Sexpr{sprintf('%.2f', dist_Ku)} m, respectively.
+}
+
+\question{3}{Using your computer, choose of the aperature antenna patterns discussed, and produce a 3D plot of it.}
+{
+
+<<echo = FALSE>>=
+
+require(rgl)
+
+
+
+@
+
+
+}
+
 \end{document}
