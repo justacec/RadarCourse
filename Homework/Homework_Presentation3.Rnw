@@ -48,7 +48,26 @@ h(t) & = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(t')e^{-j2\pi ft'}e^{j2\
 Verify that if $h(t)=K, H(f)=K\delta(f)$ and that if $h(t)=K\delta(t), H(f)=K$.
 }{
 
+\begin{minipage}[t]{2.5in}
+\begin{align*}
+H(f) & = \int_{-\infty}^{\infty}h(t)e^{-j2\pi ft}dt \\
+& = \int_{-\infty}^{\infty}Ke^{-j2\pi ft}dt \\
+& = K\int_{-\infty}^{\infty}e^{-j2\pi ft}dt \\
+& = -K \left(\frac{1}{2\pi}\right)\int_{-\infty}^{\infty}e^{jpf}dp \\
+& = -K\delta(f)
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{2.5in}
+\begin{align*}
+h(t) & = \int_{-\infty}^{\infty}H(f)e^{j2\pi ft}df \\
+& = \int_{-\infty}^{\infty}Ke^{j2\pi ft}df \\
+& = K \int_{-\infty}^{\infty}e^{j2\pi ft}df \\
+& = K \left(\frac{1}{2\pi}\right)\int_{-\infty}^{\infty}e^{jpt}dp \\
+& = K\delta(t)
+\end{align*}
+\end{minipage}
 
+There seems to be an issue with the minus sign on the first solution.  I am not sure how to avoid having a minus sign for at least one of the solutions because of the structure of the transforms.
 }
 
 \question{3}{
