@@ -33,11 +33,23 @@
 
 \question{1}{
 Verify that $h(t)=\int_{-\infty}^{\infty}H(f)e^{j2\pi ft}df$.
-}{}
+}{
+
+\begin{align*}
+h(t) & = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(t')e^{-j2\pi ft'}e^{j2\pi ft}dt'df & & \\
+& = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(t')e^{j2\pi f(t-t')}dt'df & & \\
+& = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(t')e^{jp(t-t')}\left(\frac{1}{2\pi}\right)dpdt' & & \text{Let }p = 2\pi f\\
+& = \int_{-\infty}^{\infty}h(t')\delta(t-t')dt' & & \text{Since } 2\pi\delta(x-a)=\int_{-\infty}^{\infty}e^{ip(x-a)}dp\\
+& = h(t)
+\end{align*}
+}
 
 \question{2}{
 Verify that if $h(t)=K, H(f)=K\delta(f)$ and that if $h(t)=K\delta(t), H(f)=K$.
-}{}
+}{
+
+
+}
 
 \question{3}{
 Verify that if $h(t)=\sum\limits_{n=-\infty}^{\infty}\delta(t-nT), H(f)=\frac{1}{T}\sum\limits_{-\infty}^{\infty}\delta\left(f-\frac{n}{T}\right)$.
