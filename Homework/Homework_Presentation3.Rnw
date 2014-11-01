@@ -76,7 +76,24 @@ Verify that if $h(t)=\sum\limits_{n=-\infty}^{\infty}\delta(t-nT), H(f)=\frac{1}
 
 \question{4}{
 Verify that, if $h(t)\leftrightarrow H(f), h(t-t_0)\leftrightarrow H(f)e^{-j2\pi ft_0}$.
-}{}
+}{
+\begin{minipage}[t]{2.5in}
+\begin{align*}
+H(f)e^{-j2\pi ft_0} & = \int_{-\infty}^{\infty}h(t-t_0)e^{-j2\pi ft}dt & &\\
+& = \int_{-\infty}^{\infty}h(t')e^{-j2\pi f(t'+t_0)}dt' & & \text{Let } t'=t-t_0\\
+& = \int_{-\infty}^{\infty}h(t')e^{-j2\pi ft'}e^{-j2\pi ft_0}dt' & & \\
+& = \int_{-\infty}^{\infty}h(t')e^{-j2\pi ft'}dt'e^{-j2\pi ft_0} & & \\
+& = H(f)e^{-j2\pi ft_0}
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{2.5in}
+\begin{align*}
+h(t-t_0) & = \int_{-\infty}^{\infty}H(f)e^{-j2\pi ft_0}e^{j2\pi ft}df \\
+& = \int_{-\infty}^{\infty}H(f)e^{-j2\pi f(t-t_0)}df \\
+& = h(t-t_0)
+\end{align*}
+\end{minipage}
+}
 
 \question{5}{
 Verify that, if $h(t)$ is even, then $H(f)$ is real, and that if $h(t)$ is odd, then $H(f)$ is imaginary.
