@@ -97,10 +97,21 @@ h(t-t_0) & = \int_{-\infty}^{\infty}H(f)e^{-j2\pi ft_0}e^{j2\pi ft}df \\
 
 \question{5}{
 Verify that, if $h(t)$ is even, then $H(f)$ is real, and that if $h(t)$ is odd, then $H(f)$ is imaginary.
-}{}
+}{
+
+
+\begin{align*}
+H(f) & = \int_{-\infty}^{\infty}h(t)e^{-j2\pi ft}dt \\
+& = \int_{-\infty}^{\infty}h(t)\left[\cos(2\pi ft) + j\sin(2\pi ft)\right]dt\\
+& = \int_{-\infty}^{\infty}h(t)\cos(2\pi ft)dt + j\int_{-\infty}^{\infty}h(t)\sin(2\pi ft)dt 
+\end{align*}
+
+In the above form of the equation, the first term in the sum is real and the second term is imaginary.  In the event that $h(t)$ is even, the first term is even and the second term is odd.  Because the integral is across the domain is centered at zero, the second term vanishes and the overall result is real.  In the event that $h(t)$ is odd, the reverse happens.  The integrand for the first term becomes overall odd and vanishes while the integrand in the second term becomes even and survives and the overall result is then imaginary.
+
+}
 
 \question{6}{
-Verify that $x(t)\ast h(t)=\int_{-\infty}^{\infty}h(t)x(t-\tau)d\tau$.
+Verify that $x(t)\ast h(t)=\int_{-\infty}^{\infty}h(\tau)x(t-\tau)d\tau$.
 }{}
 
 \end{document}
