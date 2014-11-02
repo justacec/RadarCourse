@@ -118,9 +118,82 @@ The threshold range for the far field for $D=1$m for the L band, S Band, X Band,
 \question{3}{Using your computer, choose of the aperature antenna patterns discussed, and produce a 3D plot of it.}
 {
 
+I have choosen to replicate the 20$\lambda$ x 10$\lambda$ rectangular plane aperature presented in the slides.  The exact formula that I used is the following:
+
+\begin{equation*}
+f(u,v) = \text{sinc}\left(\frac{kL_xu}{2}\right)\text{sinc}\left(\frac{kL_yv}{2}\right)
+\end{equation*}
+
 <<echo = FALSE>>=
 
-require(rgl)
+library(ggplot2)
+
+LBandFreq  = 1.5e9 # Hz
+SBandFreq  = 3e9 # Hz
+XBandFreq  = 10e9 # Hz
+KuBandFreq = 15e9 # Hz
+
+c = 3e8 # m/s
+
+lambda = c / LBandFreq
+lambda = 0.1
+
+Lx = 20*lambda
+Ly = 10*lambda
+a = 0.3/2
+k = (2*pi)/lambda
+
+sinc = function(x) {
+  ret = sin(x)/x
+  ret[x == 0] = 1
+  return(ret)
+}
+
+fsquaretp = function(theta, phi, k, Lx, Ly) {
+  u = sin(theta) * cos(phi)
+  v = sin(theta) * sin(phi)
+  ret = sinc(k*Lx*u/2)*sinc(k*Ly*v/2)
+  #ret = sinc(theta)*sinc(phi)
+  
+  return(ret)
+}
+
+fsquare = function(u, v, k, Lx, Ly) {
+  ret = sinc(k*Lx*u/2)*sinc(k*Ly*v/2)
+  return(ret)
+}
+
+fcircle = function(theta, phi, k, a) {
+  x = k * a * sin(theta)
+  return(2*besselJ(abs(x), 1)/x)
+}
+
+u = seq(-1, 1, length.out = 500)
+v = seq(-1, 1, length.out = 500)
+
+TP = expand.grid(u = u, v = v)
+
+#z = fcircle(TP$theta, TP$phi, k, a)
+z1 = fsquare(TP$u, TP$v, k, Lx, Ly)
+
+z1mdb = abs(z1)
+z1mdb = z1mdb / max(z1mdb, na.rm = TRUE)
+z1mdb = 20*log10(abs(z1mdb))
+z1mdb[z1mdb < -50] = -50
+z1mdb[is.na(z1mdb)] = -50
+
+data = data.frame(u = TP$u, v = TP$v, z = z1mdb)
+
+rp = ggplot(data) + theme_bw() +
+  geom_tile(aes(x = u, y = v, fill = z)) +
+  stat_contour(aes(x = u, y = v, z = z), bins = 5, alpha = 0.5, size = 0.5) +
+  labs(x = expression(paste('u = sin(', theta, ')cos(', phi, ')')), y = expression(paste('v = sin(', theta, ')sin(', phi, ')'))) +
+  scale_fill_gradient2(name = expression(paste('f(', theta, ', ', phi, ') [dB]')), low="white", mid="orange", high="red", midpoint = -25) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +  
+  coord_equal()
+rp
+
 
 
 
