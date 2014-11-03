@@ -31,7 +31,7 @@
 
 \vspace{.5in}
 
-\question{1}{Consider a Long ($N>>1$) Linear Array of Length $L$.  Suppose that the Center $N/4$ Elements do not work.  Develop a Revised Expression for the Radiation Pattern, and Calculate the New Half-Power Beamwidth (HPBW), for $\theta=90^\circ$ (Broadside), $45^\circ$, $^\circ$ (End Fire).}{}
+\question{1}{Consider a Long ($N>>1$) Linear Array of Length $L$.  Suppose that the Center $N/4$ Elements do not work.  Develop a Revised Expression for the Radiation Pattern, and Calculate the New Half-Power Beamwidth (HPBW), for $\theta=90^\circ$ (Broadside), $45^\circ$, $0^\circ$ (End Fire).}{}
 
 \question{2}{Calculate the Coordinate-Transform Matricies Between the $(\theta, \phi)$ Coordinates and the $(\alpha, \epsilon)$ Coordinates.  Suppose that $\alpha=-30^\circ$ and $\epsilon=45^\circ$, Find $\theta, \phi$.  Suppose that $\theta=45^\circ$ and $\phi=30^\circ$, Find $\alpha, \epsilon$.}{}
 
