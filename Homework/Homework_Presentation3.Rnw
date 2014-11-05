@@ -4,6 +4,7 @@
 \usepackage{longtable}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage[mathscr]{euscript}
 \usepackage{bm}
 
 \newcommand{\question}[3]{
@@ -112,6 +113,23 @@ In the above form of the equation, the first term in the sum is real and the sec
 
 \question{6}{
 Verify that $x(t)\ast h(t)=\int_{-\infty}^{\infty}h(\tau)x(t-\tau)d\tau$.
-}{}
+}{
+
+\begin{align*}
+x(t)\ast h(t) & = \mathscr{F}^{-1}\left\{\mathscr{F}(x)\mathscr{F}(h)\right\} & &\\
+& = \int_{-\infty}^{\infty}\left\{\int_{-\infty}^{\infty}x(t)e^{-j2\pi ft}dt\int_{-\infty}^{\infty}h(\tau)e^{-j2\pi f\tau}d\tau\right\}e^{j2\pi ft''}df & &\\
+& = \int_{-\infty}^{\infty}\left\{\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}x(t)h(\tau)e^{-j2\pi f(t+\tau)}dtd\tau\right\}e^{j2\pi ft''}df & &\\
+& = \int_{-\infty}^{\infty}\left\{\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(\tau)x(t'-\tau)e^{-j2\pi f(t')}dt'd\tau\right\}e^{j2\pi ft''}df & & \text{Let }t'=t+\tau\\
+& = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(\tau)x(t'-\tau)e^{-j2\pi f(t')}e^{j2\pi ft''}dt'd\tau df & & \\
+& = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(\tau)x(t'-\tau)e^{-j2\pi f(t'-t'')}dt'd\tau df & & \\
+& = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(\tau)x(t'-\tau)\left(\frac{1}{2\pi}\right)e^{-jp(t'-t'')}dt'd\tau dp & & \text{Let } p=2\pi f\\
+& = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(\tau)x(t'-\tau)\delta(t'-t'')dt'd\tau & &\\
+& = \int_{-\infty}^{\infty}h(\tau)x(t''-\tau)d\tau & &\\
+\end{align*}
+
+I tried to do this in one large operation here.  In my scratch I did it as two seperate operations and I beleive it was cleaner.  I think that there is a problem with the fact that I introduced the $t''$ variable and the final result is with respect to that variable and not just $t$.  I introduced that because I did not want to have to integrate over it when I did the conversion to $t'$.  Thoughts?  I think this is the approach that you were looking for though.
+
+
+}
 
 \end{document}
