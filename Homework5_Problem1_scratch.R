@@ -89,6 +89,7 @@ res = f(theta, alpha, k, d, N, C)
 #res = f_ana(theta, alpha[1], k, d, N, C)
 resNorm = res / max(res)
 res2 = f_ana(theta, alpha[1], k, d, N, C)
+res2Norm = res2
 #res2Norm = res2 / max(res2)
 
 pdata = data.frame(theta = theta, cosTheta = cos(theta), sinTheta = sin(theta), psi = psi(theta, alpha, k, d), f = res, fN = resNorm, f2 = res2, fN2 = res2Norm)
