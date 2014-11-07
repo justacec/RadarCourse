@@ -6,13 +6,15 @@
 \usepackage{amssymb}
 \usepackage{bm}
 
-\newcommand{\question}[3]{
+\newenvironment{question}[2]
+{
 \begin{itemize}
 \item[{\makebox[1cm]{#1)}}] #2
 
 \vspace{.2in}
 
-#3
+}
+{
 
 \end{itemize}
 
@@ -30,5 +32,37 @@
 \hrule
 
 \vspace{.5in}
+
+\begin{question}{1}{Using tables or a computer, for a zero-mean Gaussian distribution, determine the probability that $x$ (the indepenant variable) exceeds 1$\sigma$, 2$\sigma$, 3$\sigma$, 4$\sigma$.}
+
+I am going to assume that you are looking for the complement to the integral of the the gaussian distribution between -$\alpha\sigma$ and +$\alpha\sigma$ where $\alpha$ equals 1, 2, 3, and 4.  This can be done by finding the difference between the CDF function for the distribution evaluated at the two different points.
+
+The code to determine the integral is defined below:
+
+<<echo = TRUE, tidy = FALSE>>=
+getNormIntegral = function(x, sd = 1) {
+  res = pnorm(x*sd, sd = sd) - pnorm(-1*x*sd, sd = sd)  
+  return(1.0 - res)
+}
+@
+
+\begin{center}
+\begin{tabular}{c|l}\hline
+Number of $\sigma$ & Probability to Exceed \\ \hline
+1 & \texttt{getNormIntegral(1) = }\Sexpr{sprintf("%.4f", getNormIntegral(1))} \\
+2 & \texttt{getNormIntegral(2) = }\Sexpr{sprintf("%.4f", getNormIntegral(2))} \\
+3 & \texttt{getNormIntegral(3) = }\Sexpr{sprintf("%.4f", getNormIntegral(3))} \\
+4 & \texttt{getNormIntegral(4) = }\Sexpr{sprintf("%.4f", getNormIntegral(4))} \\ \hline
+\end{tabular}
+\end{center}
+
+\end{question}
+
+
+\begin{question}{2}{Choose a set of resonable values of $P_D$, $P_{FA}$, $n$, and $n_e$, and compute $D_e$ = required SNR for detection, using the methodology outlined in Section 4.1. (Charts 33 and 34)}
+\end{question}
+
+\begin{question{3{For a binary integrator, assume $P_D(1/1)=0.7$.  Find the probability of \textit{exactly} 5 out of 8 detections, and the probability of \textit{at least} 5 out of 8 detections.}
+\end{question}
 
 \end{document}
