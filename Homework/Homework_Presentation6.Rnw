@@ -62,7 +62,16 @@ Number of $\sigma$ & Probability to Exceed \\ \hline
 \begin{question}{2}{Choose a set of resonable values of $P_D$, $P_{FA}$, $n$, and $n_e$, and compute $D_e$ = required SNR for detection, using the methodology outlined in Section 4.1. (Charts 33 and 34)}
 \end{question}
 
-\begin{question{3{For a binary integrator, assume $P_D(1/1)=0.7$.  Find the probability of \textit{exactly} 5 out of 8 detections, and the probability of \textit{at least} 5 out of 8 detections.}
+\begin{question}{3}{For a binary integrator, assume $P_D(1/1)=0.7$.  Find the probability of \textit{exactly} 5 out of 8 detections, and the probability of \textit{at least} 5 out of 8 detections.}
+The probability of $m$ out of $n$ detections given a specific probability $p$ is found through the application of the binomial.
+
+\begin{equation*}
+P_D(m,n) = \binom{n}{m}p^m\left(1-p\right)^{n-m}
+\end{equation*}
+
+The answer for the first question of exactly 5 out of 8 is \texttt{dbinom(5, 8, 0.7) = }\Sexpr{sprintf('%.2f', dbinom(5, 8, 0.7))}.  The answer for the second question for the probability of at least 5 out of 8 can be found by taking the complement of the cumulative distribution function evaluated at 4 success; \texttt{1 - pbinom(4,8,0.7) = }\Sexpr{sprintf('%.2f', 1-pbinom(4, 8, 0.7))}.
+
 \end{question}
+
 
 \end{document}
