@@ -6,13 +6,15 @@
 \usepackage{amssymb}
 \usepackage{bm}
 
-\newcommand{\question}[3]{
+\newenvironment{question}[2]
+{
 \begin{itemize}
 \item[{\makebox[1cm]{#1)}}] #2
 
 \vspace{.2in}
 
-#3
+}
+{
 
 \end{itemize}
 
@@ -30,5 +32,45 @@
 \hrule
 
 \vspace{.5in}
+
+\begin{question}{1}{Prove the four properties of the ambiguity function given in section 4.2.4}
+
+\begin{question}{A}{The matched filter output when the target is just as expected ($\tau=0, v=0$) is
+
+\begin{equation*}
+\left|\chi(0, 0)\right| = 1
+\end{equation*}
+}
+\end{question}
+
+\begin{question}{B}{When the target is not just as expected, the filter output cannot be greater than $\left|\chi(0, 0)\right|$ and generallt is less:
+
+\begin{equation*}
+0\leq\left|\chi(\tau, v)\right|\leq 1
+\end{equation*}
+}
+\end{question}
+
+\begin{question}{C}{The integral of $\left|\chi(\tau, v)\right|^2=1$:
+
+\begin{equation*}
+\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\left|\chi(\tau, v)\right|^2d\tau dv = 1
+\end{equation*}
+
+}
+\end{question}
+
+\begin{question}{D}{$\left|\chi(-\tau,-v)\right| = \left|\chi(\tau, v)\right|$.}
+\end{question}
+
+\end{question}
+
+\begin{question}{2}{For a single monochomatic pulse, show that
+
+\begin{equation*}
+\chi(\tau,v) = \left(1-\frac{|\tau|}{t_p}\right)\text{sinc}\left[\pi vt_p\left(1-\frac{|\tau|}{t_p}\right)\right], \qquad |\tau|\leq t_p; 0\text{ elsewhere.}
+\end{equation*}
+}
+\end{question}
 
 \end{document}
