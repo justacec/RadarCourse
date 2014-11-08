@@ -60,6 +60,20 @@ Number of $\sigma$ & Probability to Exceed \\ \hline
 
 
 \begin{question}{2}{Choose a set of resonable values of $P_D$, $P_{FA}$, $n$, and $n_e$, and compute $D_e$ = required SNR for detection, using the methodology outlined in Section 4.1. (Charts 33 and 34)}
+
+To solve this problem I will use equation 4.16 from the text.
+
+\begin{equation*}
+SNR_{\text{required}}=D_e(n, n_e)=\frac{D_0(1)L_i(n)L_f(n_e)}{n}
+\end{equation*}
+
+In this equation $D_0(1)$ is the detectability factor for a non-fluctuating target with a single integration pulse, $L_i(n)$ represents the losses due to integration, $L_f(n_e)$ are the losses due to the Swerling case, and $n$ is the number of pulses that are being integrated over.  Assuming that we are dealing with a Swerling-1 case ($n_e=1$) and we substitute equation 4.11 into the above, the equation is modified to take the following form:
+
+\begin{align*}
+SNR_{\text{required}}=D_e(n, n_e) & = \frac{D_0(1)\left(\frac{nD_0(n)}{D_0(1)}\right)\left(\frac{D_1(1)}{D_0(1)}\right)}{n} \\
+& = 
+\end{align*}
+
 \end{question}
 
 \begin{question}{3}{For a binary integrator, assume $P_D(1/1)=0.7$.  Find the probability of \textit{exactly} 5 out of 8 detections, and the probability of \textit{at least} 5 out of 8 detections.}
